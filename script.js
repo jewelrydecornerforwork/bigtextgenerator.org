@@ -29,6 +29,7 @@ const resetPrefsBtn = document.getElementById('reset-prefs-btn');
 // 全局状态
 let currentStyle = 'bold'; // 默认样式为粗体
 let currentFontSize = 60; // 默认字体大小
+let currentArtisticStyle = null; // 当前激活的艺术文字样式
 
 /**
  * 初始化应用
@@ -211,8 +212,13 @@ function handleStyleChange(event) {
         setActiveStyle(style);
         updatePreviewStyle(style);
         
-        // 清除艺术文字效果
+        // 清除艺术文字效果并重置状态
+        currentArtisticStyle = null;
         clearArtisticStyles();
+        
+        // 更新预览文字显示用户输入
+        const text = textInput.value.trim();
+        updatePreviewText(text);
     } catch (error) {
         console.error('处理样式切换失败:', error);
     }
@@ -227,8 +233,14 @@ function handleArtisticStyleChange(event) {
         setActiveArtisticStyle(style);
         updatePreviewArtisticStyle(style);
         
+        // 设置艺术文字样式状态
+        currentArtisticStyle = style;
+        
         // 清除普通文字效果
         clearNormalStyles();
+        
+        // 更新预览文字显示艺术样式名称
+        updatePreviewText();
     } catch (error) {
         console.error('处理艺术文字样式变化失败:', error);
     }
@@ -530,7 +542,13 @@ function getStyleDisplayName(style) {
 function updatePreviewText(text) {
     try {
         if (previewText) {
-            previewText.textContent = text || 'Hello World';
+            if (currentArtisticStyle) {
+                // 如果激活了艺术文字样式，显示该样式的名称
+                previewText.textContent = getStyleDisplayName(currentArtisticStyle);
+            } else {
+                // 否则显示用户输入的文字或默认文字
+                previewText.textContent = text || 'Hello World';
+            }
         }
     } catch (error) {
         console.error('更新预览文字失败:', error);
