@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Text Generator - 大字体生成器 | 免费在线文字特效工具</title>
+    <meta name="description" content="免费的大字体生成器，支持多种文字特效：霓虹、渐变、彩虹、火焰、冰霜等。在线生成炫酷文字，一键复制使用。">
+    <meta name="keywords" content="大字体生成器,文字特效,霓虹文字,渐变文字,彩虹文字,在线工具,免费工具">
+    <meta name="author" content="Big Text Generator">
+    <meta property="og:title" content="Big Text Generator - 大字体生成器">
+    <meta property="og:description" content="免费的大字体生成器，支持多种文字特效，在线生成炫酷文字">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bigtextgenerator.org">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Big Text Generator - 大字体生成器">
+    <meta name="twitter:description" content="免费的大字体生成器，支持多种文字特效">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
+</head>
+<body>
+    <header class="header">
+        <h1>Big Text Generator</h1>
+        <p>大字体生成器</p>
+    </header>
+
+    <main class="container">
+        <section class="input-section">
+            <label for="text-input">输入文字：</label>
+            <textarea 
+                id="text-input" 
+                placeholder="输入你的文字"
+                rows="4"
+            >输入你的文字</textarea>
+        </section>
+
+        <section class="controls-section">
+            <div class="control-group">
+                <label for="font-size">字体大小：<span id="font-size-value">60px</span></label>
+                <input 
+                    type="range" 
+                    id="font-size" 
+                    min="20" 
+                    max="120" 
+                    value="60"
+                >
+            </div>
+
+            <div class="control-group">
+                <label>文字样式：</label>
+                <div class="style-buttons">
+                    <button class="style-btn active" data-style="normal">普通</button>
+                    <button class="style-btn" data-style="bold">粗体</button>
+                    <button class="style-btn" data-style="shadow">阴影</button>
+                    <button class="style-btn" data-style="outline">轮廓</button>
+                    <button class="style-btn" data-style="neon">霓虹</button>
+                    <button class="style-btn" data-style="gradient">渐变</button>
+                    <button class="style-btn" data-style="rainbow">彩虹</button>
+                    <button class="style-btn" data-style="bubble">气泡</button>
+                    <button class="style-btn" data-style="fire">火焰</button>
+                    <button class="style-btn" data-style="ice">冰霜</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label for="font-family">字体选择：</label>
+                <select id="font-family" class="font-selector">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                    <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+                    <option value="'Impact', sans-serif">Impact</option>
+                    <option value="'Georgia', serif">Georgia</option>
+                    <option value="'Verdana', sans-serif">Verdana</option>
+                    <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="text-color">文字颜色：</label>
+                <input type="color" id="text-color" value="#3b82f6" class="color-picker">
+            </div>
+        </section>
+
+        <section class="preview-section">
+            <h3>预览效果：</h3>
+            <div id="text-preview" class="preview-box">
+                <span class="preview-text normal">输入你的文字</span>
+            </div>
+            <button id="copy-btn" class="copy-btn">复制文字</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
