@@ -39,9 +39,6 @@ function init() {
         requestAnimationFrame(() => {
         // 设置默认值
         setDefaultValues();
-        
-        // 初始化预览文字
-        updatePreviewText();
             
             // 绑定事件监听器
             bindEventListeners();
@@ -185,10 +182,7 @@ function bindEventListeners() {
 function handleTextInput(event) {
     try {
         const text = event.target.value;
-        // 只有在没有激活艺术文字样式时才更新预览文字
-        if (!currentArtisticStyle) {
-            updatePreviewText(text);
-        }
+        updatePreviewText(text);
     } catch (error) {
         console.error('处理文本输入失败:', error);
     }
@@ -233,14 +227,8 @@ function handleArtisticStyleChange(event) {
         setActiveArtisticStyle(style);
         updatePreviewArtisticStyle(style);
         
-        // 设置艺术文字样式状态
-        currentArtisticStyle = style;
-        
         // 清除普通文字效果
         clearNormalStyles();
-        
-        // 更新预览文字显示艺术样式名称
-        updatePreviewText();
     } catch (error) {
         console.error('处理艺术文字样式变化失败:', error);
     }
@@ -441,14 +429,6 @@ function cycleThroughStyles() {
         
         setActiveStyle(nextStyle);
         updatePreviewStyle(nextStyle);
-        
-        // 清除艺术文字样式状态
-        currentArtisticStyle = null;
-        clearArtisticStyles();
-        
-        // 更新预览文字
-        const text = textInput.value.trim();
-        updatePreviewText(text);
         
         showMessage(`Switched to ${getStyleDisplayName(nextStyle)} style`, 'info');
     } catch (error) {
@@ -1067,7 +1047,6 @@ function handleSavePreferences() {
             text: textInput.value,
             fontSize: currentFontSize,
             style: currentStyle,
-            artisticStyle: currentArtisticStyle,
             fontFamily: fontFamilySelect.value,
             textColor: textColorPicker.value,
             animation: textAnimation.value
@@ -1101,15 +1080,7 @@ function handleLoadPreferences() {
         fontSizeValue.textContent = `${currentFontSize}px`;
         
         currentStyle = preferences.style || 'bold';
-        currentArtisticStyle = preferences.artisticStyle || null;
-        
-        if (currentArtisticStyle) {
-            setActiveArtisticStyle(currentArtisticStyle);
-            updatePreviewArtisticStyle(currentArtisticStyle);
-        } else {
-            setActiveStyle(currentStyle);
-            updatePreviewStyle(currentStyle);
-        }
+        setActiveStyle(currentStyle);
         
         fontFamilySelect.value = preferences.fontFamily || 'Arial, sans-serif';
         textColorPicker.value = preferences.textColor || '#3b82f6';
@@ -1118,7 +1089,6 @@ function handleLoadPreferences() {
         // 更新预览
         updatePreview();
         updatePreviewAnimation(preferences.animation || 'none');
-        updatePreviewText();
         
         showMessage('Preferences loaded successfully!', 'success');
     } catch (error) {
@@ -1140,7 +1110,6 @@ function handleResetPreferences() {
             fontSizeValue.textContent = `${currentFontSize}px`;
             
             currentStyle = 'bold';
-            currentArtisticStyle = null;
             setActiveStyle(currentStyle);
             
             fontFamilySelect.value = 'Arial, sans-serif';
@@ -1150,7 +1119,6 @@ function handleResetPreferences() {
             // 更新预览
             updatePreview();
             updatePreviewAnimation('none');
-            updatePreviewText();
             
             // 清除保存的偏好设置
             localStorage.removeItem('bigTextGenerator_preferences');
