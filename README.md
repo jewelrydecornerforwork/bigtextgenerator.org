@@ -14,7 +14,9 @@
 
 ## 🚀 在线体验
 
-访问 [Big Text Generator](https://bigtextgenerator.org) 开始使用
+访问 [Big Text Generator](https://bigtextgenerator-qp2mb2txl-jewelrydes-projects.vercel.app) 开始使用
+
+**自定义域名**：`https://bigtextgenerator.org` (证书申请中)
 
 ## 🛠️ 技术栈
 
