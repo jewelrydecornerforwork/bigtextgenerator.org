@@ -8,6 +8,7 @@ const textInput = document.getElementById('text-input');
 const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
+const artisticButtons = document.querySelectorAll('.artistic-btn');
 const previewText = document.querySelector('.preview-text');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
@@ -119,6 +120,11 @@ function bindEventListeners() {
             button.addEventListener('click', handleStyleChange);
         });
         
+        // 艺术文字效果按钮点击
+        artisticButtons.forEach(button => {
+            button.addEventListener('click', handleArtisticStyleChange);
+        });
+        
         // 复制按钮
         copyBtn.addEventListener('click', handleCopy);
         
@@ -204,8 +210,27 @@ function handleStyleChange(event) {
         const style = event.target.dataset.style;
         setActiveStyle(style);
         updatePreviewStyle(style);
+        
+        // 清除艺术文字效果
+        clearArtisticStyles();
     } catch (error) {
         console.error('处理样式切换失败:', error);
+    }
+}
+
+/**
+ * 处理艺术文字样式变化
+ */
+function handleArtisticStyleChange(event) {
+    try {
+        const style = event.target.dataset.style;
+        setActiveArtisticStyle(style);
+        updatePreviewArtisticStyle(style);
+        
+        // 清除普通文字效果
+        clearNormalStyles();
+    } catch (error) {
+        console.error('处理艺术文字样式变化失败:', error);
     }
 }
 
@@ -227,6 +252,88 @@ function setActiveStyle(style) {
         }
     } catch (error) {
         console.error('设置激活样式失败:', error);
+    }
+}
+
+/**
+ * 设置激活的艺术文字样式按钮
+ */
+function setActiveArtisticStyle(style) {
+    try {
+        // 移除所有艺术文字按钮的激活状态
+        artisticButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        
+        // 激活当前艺术文字样式按钮
+        const activeButton = document.querySelector(`[data-style="${style}"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
+            currentStyle = style;
+        }
+    } catch (error) {
+        console.error('设置激活艺术文字样式失败:', error);
+    }
+}
+
+/**
+ * 清除艺术文字效果
+ */
+function clearArtisticStyles() {
+    try {
+        if (previewText) {
+            const artisticClasses = [
+                'gothic-reverie', 'gentle-calligraphy', 'gothic-intrigue',
+                'monospace-elegance', 'modern-blockade', 'urban-square',
+                'modern-clarity', 'vintage-script'
+            ];
+            artisticClasses.forEach(cls => previewText.classList.remove(cls));
+        }
+    } catch (error) {
+        console.error('清除艺术文字效果失败:', error);
+    }
+}
+
+/**
+ * 清除普通文字效果
+ */
+function clearNormalStyles() {
+    try {
+        if (previewText) {
+            const normalClasses = [
+                'normal', 'bold', 'shadow', 'outline', 'neon',
+                'gradient', 'rainbow', 'bubble', 'fire', 'ice'
+            ];
+            normalClasses.forEach(cls => previewText.classList.remove(cls));
+        }
+    } catch (error) {
+        console.error('清除普通文字效果失败:', error);
+    }
+}
+
+/**
+ * 更新预览艺术文字样式
+ */
+function updatePreviewArtisticStyle(style) {
+    try {
+        if (previewText) {
+            // 清除所有样式类
+            const allStyleClasses = [
+                'normal', 'bold', 'shadow', 'outline', 'neon',
+                'gradient', 'rainbow', 'bubble', 'fire', 'ice',
+                'gothic-reverie', 'gentle-calligraphy', 'gothic-intrigue',
+                'monospace-elegance', 'modern-blockade', 'urban-square',
+                'modern-clarity', 'vintage-script'
+            ];
+            allStyleClasses.forEach(cls => previewText.classList.remove(cls));
+            
+            // 添加新的艺术文字样式
+            if (style && style !== 'normal') {
+                previewText.classList.add(style);
+            }
+        }
+    } catch (error) {
+        console.error('更新预览艺术文字样式失败:', error);
     }
 }
 
@@ -404,7 +511,15 @@ function getStyleDisplayName(style) {
         'rainbow': 'Rainbow',
         'bubble': 'Bubble',
         'fire': 'Fire',
-        'ice': 'Ice'
+        'ice': 'Ice',
+        'gothic-reverie': 'Gothic Reverie',
+        'gentle-calligraphy': 'Gentle Calligraphy',
+        'gothic-intrigue': 'Gothic Intrigue',
+        'monospace-elegance': 'Monospace Elegance',
+        'modern-blockade': 'Modern Blockade',
+        'urban-square': 'Urban Square',
+        'modern-clarity': 'Modern Clarity',
+        'vintage-script': 'Vintage Script'
     };
     return styleNames[style] || style;
 }
@@ -706,6 +821,64 @@ function applyTextStyleToCanvas(ctx, style, fontSize) {
                 ctx.fillStyle = '#ffffff';
                 ctx.shadowColor = textColorPicker.value;
                 ctx.shadowBlur = 20;
+                break;
+            case 'gothic-reverie':
+                ctx.fillStyle = '#6b46c1';
+                ctx.shadowColor = '#4c1d95';
+                ctx.shadowBlur = 5;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+                break;
+            case 'gentle-calligraphy':
+                ctx.fillStyle = '#7c3aed';
+                ctx.shadowColor = 'rgba(124, 58, 237, 0.5)';
+                ctx.shadowBlur = 3;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                break;
+            case 'gothic-intrigue':
+                ctx.fillStyle = '#1f2937';
+                ctx.shadowColor = '#000';
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetX = 3;
+                ctx.shadowOffsetY = 3;
+                break;
+            case 'monospace-elegance':
+                ctx.fillStyle = '#374151';
+                ctx.shadowColor = 'rgba(55, 65, 81, 0.3)';
+                ctx.shadowBlur = 2;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                break;
+            case 'modern-blockade':
+                ctx.fillStyle = '#000';
+                ctx.shadowColor = '#fff';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 4;
+                ctx.shadowOffsetY = 4;
+                break;
+            case 'urban-square':
+                ctx.fillStyle = 'transparent';
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 3;
+                ctx.shadowColor = '#fff';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 6;
+                ctx.shadowOffsetY = 6;
+                break;
+            case 'modern-clarity':
+                ctx.fillStyle = '#374151';
+                ctx.shadowColor = 'rgba(55, 65, 81, 0.2)';
+                ctx.shadowBlur = 2;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                break;
+            case 'vintage-script':
+                ctx.fillStyle = '#92400e';
+                ctx.shadowColor = 'rgba(146, 64, 14, 0.4)';
+                ctx.shadowBlur = 4;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
                 break;
             case 'gradient':
                 const gradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
