@@ -14,6 +14,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Big Text Generator - 大字体生成器">
     <meta name="twitter:description" content="免费的大字体生成器，支持多种文字特效">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
 </head>
@@ -64,14 +67,30 @@
             <div class="control-group">
                 <label for="font-family">字体选择：</label>
                 <select id="font-family" class="font-selector">
-                    <option value="Arial, sans-serif">Arial</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
-                    <option value="'Courier New', monospace">Courier New</option>
-                    <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
-                    <option value="'Impact', sans-serif">Impact</option>
-                    <option value="'Georgia', serif">Georgia</option>
-                    <option value="'Verdana', sans-serif">Verdana</option>
-                    <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                    <optgroup label="系统字体">
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="'Times New Roman', serif">Times New Roman</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                        <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+                        <option value="'Impact', sans-serif">Impact</option>
+                        <option value="'Georgia', serif">Georgia</option>
+                        <option value="'Verdana', sans-serif">Verdana</option>
+                        <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                    </optgroup>
+                    <optgroup label="Google Fonts - 现代字体">
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Poppins', sans-serif">Poppins</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="'Open Sans', sans-serif">Open Sans</option>
+                        <option value="'Lato', sans-serif">Lato</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                        <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+                        <option value="'Ubuntu', sans-serif">Ubuntu</option>
+                    </optgroup>
+                    <optgroup label="Google Fonts - 装饰字体">
+                        <option value="'Oswald', sans-serif">Oswald</option>
+                        <option value="'Playfair Display', serif">Playfair Display</option>
+                    </optgroup>
                 </select>
             </div>
             
@@ -86,7 +105,28 @@
             <div id="text-preview" class="preview-box">
                 <span class="preview-text normal">输入你的文字</span>
             </div>
-            <button id="copy-btn" class="copy-btn">复制文字</button>
+            <div class="action-buttons">
+                <button id="copy-btn" class="action-btn copy-btn">复制文字</button>
+                <button id="export-png-btn" class="action-btn export-btn">导出PNG</button>
+                <button id="export-jpg-btn" class="action-btn export-btn">导出JPG</button>
+            </div>
+            <div class="export-options" id="export-options" style="display: none;">
+                <label for="export-size">导出尺寸：</label>
+                <select id="export-size" class="export-selector">
+                    <option value="1">原始尺寸 (1x)</option>
+                    <option value="2" selected>高清 (2x)</option>
+                    <option value="3">超高清 (3x)</option>
+                    <option value="4">4K (4x)</option>
+                </select>
+                <label for="export-bg">背景：</label>
+                <select id="export-bg" class="export-selector">
+                    <option value="transparent">透明背景</option>
+                    <option value="white">白色背景</option>
+                    <option value="black">黑色背景</option>
+                    <option value="custom">自定义颜色</option>
+                </select>
+                <input type="color" id="custom-bg-color" value="#ffffff" class="color-picker" style="display: none;">
+            </div>
         </section>
     </main>
 

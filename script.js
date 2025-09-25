@@ -12,6 +12,12 @@ const previewText = document.querySelector('.preview-text');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
 const textColorPicker = document.getElementById('text-color');
+const exportPngBtn = document.getElementById('export-png-btn');
+const exportJpgBtn = document.getElementById('export-jpg-btn');
+const exportOptions = document.getElementById('export-options');
+const exportSize = document.getElementById('export-size');
+const exportBg = document.getElementById('export-bg');
+const customBgColor = document.getElementById('custom-bg-color');
 
 // 全局状态
 let currentStyle = 'bold'; // 默认样式为粗体
@@ -22,19 +28,52 @@ let currentFontSize = 60; // 默认字体大小
  */
 function init() {
     try {
-        // 设置默认值
-        setDefaultValues();
+        // 性能优化：使用requestAnimationFrame
+        requestAnimationFrame(() => {
+            // 设置默认值
+            setDefaultValues();
+            
+            // 绑定事件监听器
+            bindEventListeners();
+            
+            // 初始化预览
+            updatePreview();
+            
+            // 添加淡入动画
+            document.body.classList.add('fade-in');
+            
+            console.log('Big Text Generator 初始化完成');
+        });
         
-        // 绑定事件监听器
-        bindEventListeners();
+        // 预加载关键字体
+        preloadFonts();
         
-        // 初始化预览
-        updatePreview();
-        
-        console.log('Big Text Generator 初始化完成');
     } catch (error) {
         console.error('初始化失败:', error);
         showError('应用初始化失败，请刷新页面重试');
+    }
+}
+
+/**
+ * 预加载关键字体
+ */
+function preloadFonts() {
+    try {
+        const criticalFonts = [
+            'Inter',
+            'Poppins',
+            'Roboto'
+        ];
+        
+        criticalFonts.forEach(fontName => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = `https://fonts.googleapis.com/css2?family=${fontName}:wght@400;600;700&display=swap`;
+            link.as = 'style';
+            document.head.appendChild(link);
+        });
+    } catch (error) {
+        console.error('预加载字体失败:', error);
     }
 }
 
@@ -82,6 +121,14 @@ function bindEventListeners() {
         
         // 颜色选择器
         textColorPicker.addEventListener('change', handleTextColorChange);
+        
+        // 导出按钮
+        exportPngBtn.addEventListener('click', () => handleExport('png'));
+        exportJpgBtn.addEventListener('click', () => handleExport('jpg'));
+        
+        // 导出选项
+        exportBg.addEventListener('change', handleExportBgChange);
+        customBgColor.addEventListener('change', handleCustomBgColorChange);
         
         // 键盘快捷键支持
         document.addEventListener('keydown', handleKeyboardShortcuts);
@@ -458,6 +505,206 @@ function showMessage(message, type = 'info') {
  */
 function showError(message) {
     showMessage(message, 'error');
+}
+
+/**
+ * 处理导出背景变化
+ */
+function handleExportBgChange(event) {
+    try {
+        const bgType = event.target.value;
+        if (bgType === 'custom') {
+            customBgColor.style.display = 'block';
+        } else {
+            customBgColor.style.display = 'none';
+        }
+    } catch (error) {
+        console.error('处理导出背景变化失败:', error);
+    }
+}
+
+/**
+ * 处理自定义背景颜色变化
+ */
+function handleCustomBgColorChange(event) {
+    try {
+        // 可以在这里添加实时预览功能
+        console.log('自定义背景颜色:', event.target.value);
+    } catch (error) {
+        console.error('处理自定义背景颜色变化失败:', error);
+    }
+}
+
+/**
+ * 处理图片导出
+ */
+async function handleExport(format) {
+    try {
+        showMessage('正在生成图片...', 'info');
+        
+        // 显示导出选项
+        exportOptions.style.display = 'block';
+        
+        // 等待用户调整设置（这里简化处理，直接导出）
+        setTimeout(() => {
+            exportImage(format);
+        }, 1000);
+        
+    } catch (error) {
+        console.error('处理导出失败:', error);
+        showMessage('导出失败，请重试', 'error');
+    }
+}
+
+/**
+ * 导出图片
+ */
+function exportImage(format) {
+    try {
+        const scale = parseInt(exportSize.value);
+        const bgType = exportBg.value;
+        const bgColor = bgType === 'custom' ? customBgColor.value : 
+                       bgType === 'white' ? '#ffffff' : 
+                       bgType === 'black' ? '#000000' : 'transparent';
+        
+        // 创建Canvas
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 获取预览元素的样式
+        const previewElement = previewText;
+        const computedStyle = window.getComputedStyle(previewElement);
+        
+        // 计算尺寸
+        const text = previewElement.textContent;
+        const fontSize = parseInt(computedStyle.fontSize) * scale;
+        const fontFamily = computedStyle.fontFamily;
+        const fontWeight = computedStyle.fontWeight;
+        
+        // 设置Canvas尺寸
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+        const textMetrics = ctx.measureText(text);
+        const textWidth = textMetrics.width;
+        const textHeight = fontSize * 1.2; // 估算高度
+        
+        // 添加边距
+        const padding = 40 * scale;
+        canvas.width = textWidth + padding * 2;
+        canvas.height = textHeight + padding * 2;
+        
+        // 设置背景
+        if (bgColor !== 'transparent') {
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // 设置文字样式
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // 应用文字样式效果
+        applyTextStyleToCanvas(ctx, currentStyle, fontSize);
+        
+        // 绘制文字
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+        
+        // 导出图片
+        const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
+        const quality = format === 'jpg' ? 0.9 : undefined;
+        
+        canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bigtext-${Date.now()}.${format}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage(`${format.toUpperCase()}图片导出成功！`, 'success');
+        }, mimeType, quality);
+        
+    } catch (error) {
+        console.error('导出图片失败:', error);
+        showMessage('导出失败，请重试', 'error');
+    }
+}
+
+/**
+ * 在Canvas上应用文字样式
+ */
+function applyTextStyleToCanvas(ctx, style, fontSize) {
+    try {
+        switch (style) {
+            case 'normal':
+                ctx.fillStyle = textColorPicker.value;
+                break;
+            case 'bold':
+                ctx.fillStyle = textColorPicker.value;
+                ctx.font = `bold ${fontSize}px ${ctx.font.split(' ').slice(1).join(' ')}`;
+                break;
+            case 'shadow':
+                ctx.fillStyle = textColorPicker.value;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetX = 4;
+                ctx.shadowOffsetY = 4;
+                break;
+            case 'outline':
+                ctx.fillStyle = 'transparent';
+                ctx.strokeStyle = textColorPicker.value;
+                ctx.lineWidth = 3;
+                break;
+            case 'neon':
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = textColorPicker.value;
+                ctx.shadowBlur = 20;
+                break;
+            case 'gradient':
+                const gradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
+                gradient.addColorStop(0, '#ff6b6b');
+                gradient.addColorStop(0.2, '#4ecdc4');
+                gradient.addColorStop(0.4, '#45b7d1');
+                gradient.addColorStop(0.6, '#96ceb4');
+                gradient.addColorStop(0.8, '#feca57');
+                gradient.addColorStop(1, '#ff6b6b');
+                ctx.fillStyle = gradient;
+                break;
+            case 'rainbow':
+                const rainbowGradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
+                rainbowGradient.addColorStop(0, '#ff0000');
+                rainbowGradient.addColorStop(0.16, '#ff7f00');
+                rainbowGradient.addColorStop(0.33, '#ffff00');
+                rainbowGradient.addColorStop(0.5, '#00ff00');
+                rainbowGradient.addColorStop(0.66, '#0000ff');
+                rainbowGradient.addColorStop(0.83, '#4b0082');
+                rainbowGradient.addColorStop(1, '#9400d3');
+                ctx.fillStyle = rainbowGradient;
+                break;
+            case 'bubble':
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = textColorPicker.value;
+                ctx.shadowBlur = 15;
+                break;
+            case 'fire':
+                ctx.fillStyle = '#ff4500';
+                ctx.shadowColor = '#ff6500';
+                ctx.shadowBlur = 10;
+                break;
+            case 'ice':
+                ctx.fillStyle = '#87ceeb';
+                ctx.shadowColor = '#b0e0e6';
+                ctx.shadowBlur = 15;
+                break;
+            default:
+                ctx.fillStyle = textColorPicker.value;
+        }
+    } catch (error) {
+        console.error('应用文字样式失败:', error);
+        ctx.fillStyle = textColorPicker.value;
+    }
 }
 
 /**

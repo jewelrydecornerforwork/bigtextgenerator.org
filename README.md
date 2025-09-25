@@ -5,11 +5,13 @@
 ## ✨ 功能特性
 
 - 🎨 **10种文字样式**：普通、粗体、阴影、轮廓、霓虹、渐变、彩虹、气泡、火焰、冰霜
-- 🔤 **8种字体选择**：Arial、Times New Roman、Courier New、Comic Sans MS等
+- 🔤 **18种字体选择**：系统字体 + Google Fonts（Inter、Poppins、Roboto等）
 - 🎯 **自定义颜色**：支持颜色选择器自定义文字颜色
 - 📏 **字体大小调节**：20px-120px范围可调
 - 📱 **响应式设计**：完美适配手机、平板、电脑
 - 🚀 **一键复制**：支持现代浏览器和传统浏览器
+- 📸 **图片导出**：支持PNG/JPG格式，多种尺寸和背景选项
+- ⚡ **性能优化**：字体预加载、懒加载、GPU加速
 - ⌨️ **键盘快捷键**：Ctrl+C复制，Ctrl+Enter切换样式
 
 ## 🚀 在线体验
@@ -47,6 +49,13 @@
 - **火焰**：火焰闪烁效果
 - **冰霜**：冰霜闪烁效果
 
+## 📸 图片导出功能
+
+- **格式支持**：PNG（透明背景）、JPG（有损压缩）
+- **尺寸选项**：1x原始、2x高清、3x超高清、4x 4K
+- **背景选择**：透明、白色、黑色、自定义颜色
+- **高质量渲染**：Canvas技术，完美还原所有特效
+
 ## 🔧 本地运行
 
 1. 克隆仓库：
@@ -73,7 +82,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 如有问题或建议，请通过以下方式联系：
 
-- 提交 [GitHub Issue](https://github.com/jewelrydecornerforwork/bigtextgenerator.org/issues)
+- 提交 [GitHub Issue](  https://github.com/jewelrydecornerforwork/bigtextgenerator.org/issues)
 - 邮箱：jewelrydecornerforwork@gmail.com
 
 ---

@@ -450,6 +450,76 @@ body {
     }
 }
 
+/* 操作按钮组 */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* 操作按钮 */
+.action-btn {
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.copy-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.export-btn {
+    background: #10b981;
+    color: white;
+}
+
+.export-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* 导出选项 */
+.export-options {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    margin-top: 20px;
+}
+
+.export-options label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.export-selector {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    background: white;
+    transition: var(--transition);
+}
+
+.export-selector:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
 /* 复制按钮 */
 .copy-btn {
     width: 100%;
@@ -490,6 +560,34 @@ body {
 .copy-btn:active {
     transform: translateY(0);
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* 性能优化 */
+.preview-text {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* 字体预加载优化 */
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-display: swap;
+}
+
+/* 懒加载动画 */
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* 响应式设计 */
