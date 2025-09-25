@@ -14,10 +14,16 @@ const fontFamilySelect = document.getElementById('font-family');
 const textColorPicker = document.getElementById('text-color');
 const exportPngBtn = document.getElementById('export-png-btn');
 const exportJpgBtn = document.getElementById('export-jpg-btn');
+const exportSvgBtn = document.getElementById('export-svg-btn');
+const exportPdfBtn = document.getElementById('export-pdf-btn');
 const exportOptions = document.getElementById('export-options');
 const exportSize = document.getElementById('export-size');
 const exportBg = document.getElementById('export-bg');
 const customBgColor = document.getElementById('custom-bg-color');
+const textAnimation = document.getElementById('text-animation');
+const savePrefsBtn = document.getElementById('save-prefs-btn');
+const loadPrefsBtn = document.getElementById('load-prefs-btn');
+const resetPrefsBtn = document.getElementById('reset-prefs-btn');
 
 // 全局状态
 let currentStyle = 'bold'; // 默认样式为粗体
@@ -125,10 +131,20 @@ function bindEventListeners() {
         // 导出按钮
         exportPngBtn.addEventListener('click', () => handleExport('png'));
         exportJpgBtn.addEventListener('click', () => handleExport('jpg'));
+        exportSvgBtn.addEventListener('click', () => handleExport('svg'));
+        exportPdfBtn.addEventListener('click', () => handleExport('pdf'));
         
         // 导出选项
         exportBg.addEventListener('change', handleExportBgChange);
         customBgColor.addEventListener('change', handleCustomBgColorChange);
+        
+        // 动画选择器
+        textAnimation.addEventListener('change', handleAnimationChange);
+        
+        // 偏好设置按钮
+        savePrefsBtn.addEventListener('click', handleSavePreferences);
+        loadPrefsBtn.addEventListener('click', handleLoadPreferences);
+        resetPrefsBtn.addEventListener('click', handleResetPreferences);
         
         // 键盘快捷键支持
         document.addEventListener('keydown', handleKeyboardShortcuts);
@@ -609,22 +625,29 @@ function exportImage(format) {
         // 绘制文字
         ctx.fillText(text, canvas.width / 2, canvas.height / 2);
         
-        // 导出图片
-        const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
-        const quality = format === 'jpg' ? 0.9 : undefined;
-        
-        canvas.toBlob((blob) => {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `bigtext-${Date.now()}.${format}`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+        // 根据格式处理导出
+        if (format === 'svg') {
+            exportAsSVG(canvas, text, bgColor);
+        } else if (format === 'pdf') {
+            exportAsPDF(canvas, text, bgColor);
+        } else {
+            // PNG/JPG导出
+            const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
+            const quality = format === 'jpg' ? 0.9 : undefined;
             
-            showMessage(`${format.toUpperCase()} image exported successfully!`, 'success');
-        }, mimeType, quality);
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `bigtext-${Date.now()}.${format}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showMessage(`${format.toUpperCase()} image exported successfully!`, 'success');
+            }, mimeType, quality);
+        }
         
     } catch (error) {
         console.error('导出图片失败:', error);
@@ -704,6 +727,212 @@ function applyTextStyleToCanvas(ctx, style, fontSize) {
     } catch (error) {
         console.error('应用文字样式失败:', error);
         ctx.fillStyle = textColorPicker.value;
+    }
+}
+
+/**
+ * 导出为SVG
+ */
+function exportAsSVG(canvas, text, bgColor) {
+    try {
+        const svg = `
+            <svg width="${canvas.width}" height="${canvas.height}" xmlns="http://www.w3.org/2000/svg">
+                ${bgColor !== 'transparent' ? `<rect width="100%" height="100%" fill="${bgColor}"/>` : ''}
+                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" 
+                      font-family="${fontFamilySelect.value}" 
+                      font-size="${parseInt(fontSizeSlider.value)}px" 
+                      font-weight="${currentStyle === 'bold' ? 'bold' : 'normal'}"
+                      fill="${textColorPicker.value}">
+                    ${text}
+                </text>
+            </svg>
+        `;
+        
+        const blob = new Blob([svg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `bigtext-${Date.now()}.svg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showMessage('SVG exported successfully!', 'success');
+    } catch (error) {
+        console.error('SVG导出失败:', error);
+        showMessage('SVG export failed', 'error');
+    }
+}
+
+/**
+ * 导出为PDF
+ */
+function exportAsPDF(canvas, text, bgColor) {
+    try {
+        // 创建PDF内容
+        const pdfContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { margin: 0; padding: 20px; }
+                    .text-content {
+                        font-family: ${fontFamilySelect.value};
+                        font-size: ${parseInt(fontSizeSlider.value)}px;
+                        font-weight: ${currentStyle === 'bold' ? 'bold' : 'normal'};
+                        color: ${textColorPicker.value};
+                        text-align: center;
+                        ${bgColor !== 'transparent' ? `background-color: ${bgColor};` : ''}
+                        padding: 40px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="text-content">${text}</div>
+            </body>
+            </html>
+        `;
+        
+        // 使用浏览器打印功能生成PDF
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(pdfContent);
+        printWindow.document.close();
+        printWindow.focus();
+        
+        setTimeout(() => {
+            printWindow.print();
+            showMessage('PDF export initiated! Use browser print dialog to save as PDF.', 'success');
+        }, 500);
+        
+    } catch (error) {
+        console.error('PDF导出失败:', error);
+        showMessage('PDF export failed', 'error');
+    }
+}
+
+/**
+ * 处理动画变化
+ */
+function handleAnimationChange(event) {
+    try {
+        const animation = event.target.value;
+        updatePreviewAnimation(animation);
+    } catch (error) {
+        console.error('处理动画变化失败:', error);
+    }
+}
+
+/**
+ * 更新预览动画
+ */
+function updatePreviewAnimation(animation) {
+    try {
+        if (previewText) {
+            // 移除所有动画类
+            const animationClasses = ['animate-bounce', 'animate-pulse', 'animate-shake', 'animate-wiggle', 'animate-glow', 'animate-float', 'animate-slide', 'animate-zoom', 'animate-rotate'];
+            animationClasses.forEach(cls => previewText.classList.remove(cls));
+            
+            // 添加新动画类
+            if (animation !== 'none') {
+                previewText.classList.add(`animate-${animation}`);
+            }
+        }
+    } catch (error) {
+        console.error('更新预览动画失败:', error);
+    }
+}
+
+/**
+ * 处理保存偏好设置
+ */
+function handleSavePreferences() {
+    try {
+        const preferences = {
+            text: textInput.value,
+            fontSize: currentFontSize,
+            style: currentStyle,
+            fontFamily: fontFamilySelect.value,
+            textColor: textColorPicker.value,
+            animation: textAnimation.value
+        };
+        
+        localStorage.setItem('bigTextGenerator_preferences', JSON.stringify(preferences));
+        showMessage('Preferences saved successfully!', 'success');
+    } catch (error) {
+        console.error('保存偏好设置失败:', error);
+        showMessage('Failed to save preferences', 'error');
+    }
+}
+
+/**
+ * 处理加载偏好设置
+ */
+function handleLoadPreferences() {
+    try {
+        const saved = localStorage.getItem('bigTextGenerator_preferences');
+        if (!saved) {
+            showMessage('No saved preferences found', 'warning');
+            return;
+        }
+        
+        const preferences = JSON.parse(saved);
+        
+        // 应用保存的设置
+        textInput.value = preferences.text || 'Hello World';
+        currentFontSize = preferences.fontSize || 60;
+        fontSizeSlider.value = currentFontSize;
+        fontSizeValue.textContent = `${currentFontSize}px`;
+        
+        currentStyle = preferences.style || 'bold';
+        setActiveStyle(currentStyle);
+        
+        fontFamilySelect.value = preferences.fontFamily || 'Arial, sans-serif';
+        textColorPicker.value = preferences.textColor || '#3b82f6';
+        textAnimation.value = preferences.animation || 'none';
+        
+        // 更新预览
+        updatePreview();
+        updatePreviewAnimation(preferences.animation || 'none');
+        
+        showMessage('Preferences loaded successfully!', 'success');
+    } catch (error) {
+        console.error('加载偏好设置失败:', error);
+        showMessage('Failed to load preferences', 'error');
+    }
+}
+
+/**
+ * 处理重置偏好设置
+ */
+function handleResetPreferences() {
+    try {
+        if (confirm('Are you sure you want to reset all settings to default?')) {
+            // 重置所有设置
+            textInput.value = 'Hello World';
+            currentFontSize = 60;
+            fontSizeSlider.value = currentFontSize;
+            fontSizeValue.textContent = `${currentFontSize}px`;
+            
+            currentStyle = 'bold';
+            setActiveStyle(currentStyle);
+            
+            fontFamilySelect.value = 'Arial, sans-serif';
+            textColorPicker.value = '#3b82f6';
+            textAnimation.value = 'none';
+            
+            // 更新预览
+            updatePreview();
+            updatePreviewAnimation('none');
+            
+            // 清除保存的偏好设置
+            localStorage.removeItem('bigTextGenerator_preferences');
+            
+            showMessage('Settings reset to default!', 'success');
+        }
+    } catch (error) {
+        console.error('重置偏好设置失败:', error);
+        showMessage('Failed to reset preferences', 'error');
     }
 }
 

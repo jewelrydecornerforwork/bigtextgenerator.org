@@ -16,7 +16,7 @@
     <meta name="twitter:description" content="Free big text generator with multiple text effects">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Ubuntu:wght@300;400;500;700&family=Nunito:wght@300;400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Roboto+Slab:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
 </head>
@@ -77,7 +77,7 @@
                         <option value="'Verdana', sans-serif">Verdana</option>
                         <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
                     </optgroup>
-                    <optgroup label="Google Fonts - Modern">
+                    <optgroup label="Google Fonts - Modern Sans">
                         <option value="'Inter', sans-serif">Inter</option>
                         <option value="'Poppins', sans-serif">Poppins</option>
                         <option value="'Roboto', sans-serif">Roboto</option>
@@ -86,10 +86,22 @@
                         <option value="'Montserrat', sans-serif">Montserrat</option>
                         <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
                         <option value="'Ubuntu', sans-serif">Ubuntu</option>
+                        <option value="'Nunito', sans-serif">Nunito</option>
+                        <option value="'Quicksand', sans-serif">Quicksand</option>
+                        <option value="'Raleway', sans-serif">Raleway</option>
+                        <option value="'Work Sans', sans-serif">Work Sans</option>
+                        <option value="'Noto Sans', sans-serif">Noto Sans</option>
                     </optgroup>
-                    <optgroup label="Google Fonts - Decorative">
-                        <option value="'Oswald', sans-serif">Oswald</option>
+                    <optgroup label="Google Fonts - Serif">
                         <option value="'Playfair Display', serif">Playfair Display</option>
+                        <option value="'Merriweather', serif">Merriweather</option>
+                        <option value="'PT Serif', serif">PT Serif</option>
+                        <option value="'Roboto Slab', serif">Roboto Slab</option>
+                        <option value="'Noto Serif', serif">Noto Serif</option>
+                    </optgroup>
+                    <optgroup label="Google Fonts - Display">
+                        <option value="'Oswald', sans-serif">Oswald</option>
+                        <option value="'PT Sans', sans-serif">PT Sans</option>
                     </optgroup>
                 </select>
             </div>
@@ -97,6 +109,22 @@
             <div class="control-group">
                 <label for="text-color">Text Color:</label>
                 <input type="color" id="text-color" value="#3b82f6" class="color-picker">
+            </div>
+            
+            <div class="control-group">
+                <label for="text-animation">Text Animation:</label>
+                <select id="text-animation" class="font-selector">
+                    <option value="none">No Animation</option>
+                    <option value="bounce">Bounce</option>
+                    <option value="pulse">Pulse</option>
+                    <option value="shake">Shake</option>
+                    <option value="wiggle">Wiggle</option>
+                    <option value="glow">Glow</option>
+                    <option value="float">Float</option>
+                    <option value="slide">Slide</option>
+                    <option value="zoom">Zoom</option>
+                    <option value="rotate">Rotate</option>
+                </select>
             </div>
         </section>
 
@@ -109,6 +137,13 @@
                 <button id="copy-btn" class="action-btn copy-btn">Copy Text</button>
                 <button id="export-png-btn" class="action-btn export-btn">Export PNG</button>
                 <button id="export-jpg-btn" class="action-btn export-btn">Export JPG</button>
+                <button id="export-svg-btn" class="action-btn export-btn">Export SVG</button>
+                <button id="export-pdf-btn" class="action-btn export-btn">Export PDF</button>
+            </div>
+            <div class="preference-buttons">
+                <button id="save-prefs-btn" class="action-btn save-btn">Save Preferences</button>
+                <button id="load-prefs-btn" class="action-btn load-btn">Load Preferences</button>
+                <button id="reset-prefs-btn" class="action-btn reset-btn">Reset</button>
             </div>
             <div class="export-options" id="export-options" style="display: none;">
                 <label for="export-size">Export Size:</label>
