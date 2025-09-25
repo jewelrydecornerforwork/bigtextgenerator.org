@@ -21,148 +21,198 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
 </head>
 <body>
-    <header class="header">
-        <h1>Big Text Generator</h1>
-        <p>Create Stunning Text Effects Online</p>
-    </header>
-
-    <main class="container">
-        <section class="input-section">
-            <label for="text-input">Enter Text:</label>
-            <textarea 
-                id="text-input" 
-                placeholder="Type your text here"
-                rows="4"
-            >Hello World</textarea>
-        </section>
-
-        <section class="controls-section">
-            <div class="control-group">
-                <label for="font-size">Font Size: <span id="font-size-value">60px</span></label>
-                <input 
-                    type="range" 
-                    id="font-size" 
-                    min="20" 
-                    max="120" 
-                    value="60"
-                >
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Big Text Generator</h1>
+                <span class="nav-subtitle">Create Stunning Text Effects</span>
             </div>
+            <div class="nav-actions">
+                <button class="nav-btn" id="help-btn">Help</button>
+                <button class="nav-btn primary" id="premium-btn">Premium</button>
+            </div>
+        </div>
+    </nav>
 
-            <div class="control-group">
-                <label>Text Style:</label>
-                <div class="style-buttons">
-                    <button class="style-btn active" data-style="normal">Normal</button>
-                    <button class="style-btn" data-style="bold">Bold</button>
-                    <button class="style-btn" data-style="shadow">Shadow</button>
-                    <button class="style-btn" data-style="outline">Outline</button>
-                    <button class="style-btn" data-style="neon">Neon</button>
-                    <button class="style-btn" data-style="gradient">Gradient</button>
-                    <button class="style-btn" data-style="rainbow">Rainbow</button>
-                    <button class="style-btn" data-style="bubble">Bubble</button>
-                    <button class="style-btn" data-style="fire">Fire</button>
-                    <button class="style-btn" data-style="ice">Ice</button>
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Left Sidebar - Controls -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Text Input</h3>
+                <div class="input-group">
+                    <textarea 
+                        id="text-input" 
+                        placeholder="Enter your text here..."
+                        rows="3"
+                        class="text-input"
+                    >Hello World</textarea>
                 </div>
             </div>
-            
-            <div class="control-group">
-                <label for="font-family">Font Family:</label>
-                <select id="font-family" class="font-selector">
-                    <optgroup label="System Fonts">
-                        <option value="Arial, sans-serif">Arial</option>
-                        <option value="'Times New Roman', serif">Times New Roman</option>
-                        <option value="'Courier New', monospace">Courier New</option>
-                        <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
-                        <option value="'Impact', sans-serif">Impact</option>
-                        <option value="'Georgia', serif">Georgia</option>
-                        <option value="'Verdana', sans-serif">Verdana</option>
-                        <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-                    </optgroup>
-                    <optgroup label="Google Fonts - Modern Sans">
-                        <option value="'Inter', sans-serif">Inter</option>
-                        <option value="'Poppins', sans-serif">Poppins</option>
-                        <option value="'Roboto', sans-serif">Roboto</option>
-                        <option value="'Open Sans', sans-serif">Open Sans</option>
-                        <option value="'Lato', sans-serif">Lato</option>
-                        <option value="'Montserrat', sans-serif">Montserrat</option>
-                        <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
-                        <option value="'Ubuntu', sans-serif">Ubuntu</option>
-                        <option value="'Nunito', sans-serif">Nunito</option>
-                        <option value="'Quicksand', sans-serif">Quicksand</option>
-                        <option value="'Raleway', sans-serif">Raleway</option>
-                        <option value="'Work Sans', sans-serif">Work Sans</option>
-                        <option value="'Noto Sans', sans-serif">Noto Sans</option>
-                    </optgroup>
-                    <optgroup label="Google Fonts - Serif">
-                        <option value="'Playfair Display', serif">Playfair Display</option>
-                        <option value="'Merriweather', serif">Merriweather</option>
-                        <option value="'PT Serif', serif">PT Serif</option>
-                        <option value="'Roboto Slab', serif">Roboto Slab</option>
-                        <option value="'Noto Serif', serif">Noto Serif</option>
-                    </optgroup>
-                    <optgroup label="Google Fonts - Display">
-                        <option value="'Oswald', sans-serif">Oswald</option>
-                        <option value="'PT Sans', sans-serif">PT Sans</option>
-                    </optgroup>
-                </select>
-            </div>
-            
-            <div class="control-group">
-                <label for="text-color">Text Color:</label>
-                <input type="color" id="text-color" value="#3b82f6" class="color-picker">
-            </div>
-            
-            <div class="control-group">
-                <label for="text-animation">Text Animation:</label>
-                <select id="text-animation" class="font-selector">
-                    <option value="none">No Animation</option>
-                    <option value="bounce">Bounce</option>
-                    <option value="pulse">Pulse</option>
-                    <option value="shake">Shake</option>
-                    <option value="wiggle">Wiggle</option>
-                    <option value="glow">Glow</option>
-                    <option value="float">Float</option>
-                    <option value="slide">Slide</option>
-                    <option value="zoom">Zoom</option>
-                    <option value="rotate">Rotate</option>
-                </select>
-            </div>
-        </section>
 
-        <section class="preview-section">
-            <h3>Preview:</h3>
-            <div id="text-preview" class="preview-box">
-                <span class="preview-text normal">Hello World</span>
+            <div class="sidebar-section">
+                <h3>Font Settings</h3>
+                <div class="control-group">
+                    <label for="font-family">Font Family</label>
+                    <select id="font-family" class="control-select">
+                        <optgroup label="System Fonts">
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+                            <option value="'Impact', sans-serif">Impact</option>
+                            <option value="'Georgia', serif">Georgia</option>
+                            <option value="'Verdana', sans-serif">Verdana</option>
+                            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                        </optgroup>
+                        <optgroup label="Google Fonts - Modern">
+                            <option value="'Inter', sans-serif">Inter</option>
+                            <option value="'Poppins', sans-serif">Poppins</option>
+                            <option value="'Roboto', sans-serif">Roboto</option>
+                            <option value="'Open Sans', sans-serif">Open Sans</option>
+                            <option value="'Lato', sans-serif">Lato</option>
+                            <option value="'Montserrat', sans-serif">Montserrat</option>
+                            <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+                            <option value="'Ubuntu', sans-serif">Ubuntu</option>
+                            <option value="'Nunito', sans-serif">Nunito</option>
+                            <option value="'Quicksand', sans-serif">Quicksand</option>
+                            <option value="'Raleway', sans-serif">Raleway</option>
+                            <option value="'Work Sans', sans-serif">Work Sans</option>
+                            <option value="'Noto Sans', sans-serif">Noto Sans</option>
+                        </optgroup>
+                        <optgroup label="Google Fonts - Serif">
+                            <option value="'Playfair Display', serif">Playfair Display</option>
+                            <option value="'Merriweather', serif">Merriweather</option>
+                            <option value="'PT Serif', serif">PT Serif</option>
+                            <option value="'Roboto Slab', serif">Roboto Slab</option>
+                            <option value="'Noto Serif', serif">Noto Serif</option>
+                        </optgroup>
+                        <optgroup label="Google Fonts - Display">
+                            <option value="'Oswald', sans-serif">Oswald</option>
+                            <option value="'PT Sans', sans-serif">PT Sans</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="font-size">Font Size: <span id="font-size-value">60px</span></label>
+                    <input 
+                        type="range" 
+                        id="font-size" 
+                        min="20" 
+                        max="120" 
+                        value="60"
+                        class="control-slider"
+                    >
+                </div>
+
+                <div class="control-group">
+                    <label for="text-color">Text Color</label>
+                    <div class="color-input-group">
+                        <input type="color" id="text-color" value="#3b82f6" class="color-picker">
+                        <span class="color-value">#3b82f6</span>
+                    </div>
+                </div>
             </div>
-            <div class="action-buttons">
-                <button id="copy-btn" class="action-btn copy-btn">Copy Text</button>
-                <button id="export-png-btn" class="action-btn export-btn">Export PNG</button>
-                <button id="export-jpg-btn" class="action-btn export-btn">Export JPG</button>
-                <button id="export-svg-btn" class="action-btn export-btn">Export SVG</button>
-                <button id="export-pdf-btn" class="action-btn export-btn">Export PDF</button>
+
+            <div class="sidebar-section">
+                <h3>Text Effects</h3>
+                <div class="effects-grid">
+                    <button class="effect-btn active" data-style="normal">Normal</button>
+                    <button class="effect-btn" data-style="bold">Bold</button>
+                    <button class="effect-btn" data-style="shadow">Shadow</button>
+                    <button class="effect-btn" data-style="outline">Outline</button>
+                    <button class="effect-btn" data-style="neon">Neon</button>
+                    <button class="effect-btn" data-style="gradient">Gradient</button>
+                    <button class="effect-btn" data-style="rainbow">Rainbow</button>
+                    <button class="effect-btn" data-style="bubble">Bubble</button>
+                    <button class="effect-btn" data-style="fire">Fire</button>
+                    <button class="effect-btn" data-style="ice">Ice</button>
+                </div>
             </div>
-            <div class="preference-buttons">
-                <button id="save-prefs-btn" class="action-btn save-btn">Save Preferences</button>
-                <button id="load-prefs-btn" class="action-btn load-btn">Load Preferences</button>
-                <button id="reset-prefs-btn" class="action-btn reset-btn">Reset</button>
+
+            <div class="sidebar-section">
+                <h3>Animation</h3>
+                <div class="control-group">
+                    <select id="text-animation" class="control-select">
+                        <option value="none">No Animation</option>
+                        <option value="bounce">Bounce</option>
+                        <option value="pulse">Pulse</option>
+                        <option value="shake">Shake</option>
+                        <option value="wiggle">Wiggle</option>
+                        <option value="glow">Glow</option>
+                        <option value="float">Float</option>
+                        <option value="slide">Slide</option>
+                        <option value="zoom">Zoom</option>
+                        <option value="rotate">Rotate</option>
+                    </select>
+                </div>
             </div>
-            <div class="export-options" id="export-options" style="display: none;">
-                <label for="export-size">Export Size:</label>
-                <select id="export-size" class="export-selector">
-                    <option value="1">Original (1x)</option>
-                    <option value="2" selected>HD (2x)</option>
-                    <option value="3">Ultra HD (3x)</option>
-                    <option value="4">4K (4x)</option>
-                </select>
-                <label for="export-bg">Background:</label>
-                <select id="export-bg" class="export-selector">
-                    <option value="transparent">Transparent</option>
-                    <option value="white">White</option>
-                    <option value="black">Black</option>
-                    <option value="custom">Custom Color</option>
-                </select>
-                <input type="color" id="custom-bg-color" value="#ffffff" class="color-picker" style="display: none;">
-            </div>
-        </section>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Preview Section -->
+            <section class="preview-section">
+                <div class="preview-header">
+                    <h2>Preview</h2>
+                    <div class="preview-actions">
+                        <button id="copy-btn" class="action-btn primary">Copy Text</button>
+                        <div class="export-dropdown">
+                            <button class="action-btn secondary dropdown-toggle">Export</button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" id="export-png-btn">Export PNG</button>
+                                <button class="dropdown-item" id="export-jpg-btn">Export JPG</button>
+                                <button class="dropdown-item" id="export-svg-btn">Export SVG</button>
+                                <button class="dropdown-item" id="export-pdf-btn">Export PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <div id="text-preview" class="preview-box">
+                        <span class="preview-text normal">Hello World</span>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="export-options" id="export-options" style="display: none;">
+                    <div class="export-option">
+                        <label for="export-size">Export Size:</label>
+                        <select id="export-size" class="control-select">
+                            <option value="1">Original (1x)</option>
+                            <option value="2" selected>HD (2x)</option>
+                            <option value="3">Ultra HD (3x)</option>
+                            <option value="4">4K (4x)</option>
+                        </select>
+                    </div>
+                    <div class="export-option">
+                        <label for="export-bg">Background:</label>
+                        <select id="export-bg" class="control-select">
+                            <option value="transparent">Transparent</option>
+                            <option value="white">White</option>
+                            <option value="black">Black</option>
+                            <option value="custom">Custom Color</option>
+                        </select>
+                    </div>
+                    <input type="color" id="custom-bg-color" value="#ffffff" class="color-picker" style="display: none;">
+                </div>
+            </section>
+
+            <!-- Preferences Section -->
+            <section class="preferences-section">
+                <div class="preferences-header">
+                    <h3>Preferences</h3>
+                </div>
+                <div class="preferences-actions">
+                    <button id="save-prefs-btn" class="pref-btn save">Save Settings</button>
+                    <button id="load-prefs-btn" class="pref-btn load">Load Settings</button>
+                    <button id="reset-prefs-btn" class="pref-btn reset">Reset</button>
+                </div>
+            </section>
+        </div>
     </main>
 
     <script src="script.js"></script>

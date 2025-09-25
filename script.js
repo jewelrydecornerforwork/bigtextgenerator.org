@@ -7,7 +7,7 @@
 const textInput = document.getElementById('text-input');
 const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
-const styleButtons = document.querySelectorAll('.style-btn');
+const styleButtons = document.querySelectorAll('.effect-btn');
 const previewText = document.querySelector('.preview-text');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
@@ -114,7 +114,7 @@ function bindEventListeners() {
         // 字体大小滑块
         fontSizeSlider.addEventListener('input', handleFontSizeChange);
         
-        // 样式按钮点击
+        // 效果按钮点击
         styleButtons.forEach(button => {
             button.addEventListener('click', handleStyleChange);
         });
@@ -145,6 +145,22 @@ function bindEventListeners() {
         savePrefsBtn.addEventListener('click', handleSavePreferences);
         loadPrefsBtn.addEventListener('click', handleLoadPreferences);
         resetPrefsBtn.addEventListener('click', handleResetPreferences);
+        
+        // 导航按钮
+        const helpBtn = document.getElementById('help-btn');
+        const premiumBtn = document.getElementById('premium-btn');
+        
+        if (helpBtn) {
+            helpBtn.addEventListener('click', () => {
+                showMessage('Help documentation coming soon!', 'info');
+            });
+        }
+        
+        if (premiumBtn) {
+            premiumBtn.addEventListener('click', () => {
+                showMessage('Premium features coming soon!', 'info');
+            });
+        }
         
         // 键盘快捷键支持
         document.addEventListener('keydown', handleKeyboardShortcuts);
@@ -332,6 +348,12 @@ function handleTextColorChange(event) {
     try {
         const color = event.target.value;
         updatePreviewColor(color);
+        
+        // 更新颜色值显示
+        const colorValue = document.querySelector('.color-value');
+        if (colorValue) {
+            colorValue.textContent = color.toUpperCase();
+        }
     } catch (error) {
         console.error('处理文字颜色变化失败:', error);
     }
