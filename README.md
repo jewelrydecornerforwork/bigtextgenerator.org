@@ -1,90 +1,91 @@
-# Big Text Generator - 大字体生成器
+# Big Text Generator - Free Online Text Effects Tool
 
-一个功能强大的在线大字体生成器，支持多种炫酷的文字特效。
+A powerful online big text generator with multiple stunning text effects.
 
-## ✨ 功能特性
+## ✨ Features
 
-- 🎨 **10种文字样式**：普通、粗体、阴影、轮廓、霓虹、渐变、彩虹、气泡、火焰、冰霜
-- 🔤 **18种字体选择**：系统字体 + Google Fonts（Inter、Poppins、Roboto等）
-- 🎯 **自定义颜色**：支持颜色选择器自定义文字颜色
-- 📏 **字体大小调节**：20px-120px范围可调
-- 📱 **响应式设计**：完美适配手机、平板、电脑
-- 🚀 **一键复制**：支持现代浏览器和传统浏览器
-- 📸 **图片导出**：支持PNG/JPG格式，多种尺寸和背景选项
-- ⚡ **性能优化**：字体预加载、懒加载、GPU加速
-- ⌨️ **键盘快捷键**：Ctrl+C复制，Ctrl+Enter切换样式
+- 🎨 **10 Text Styles**: Normal, Bold, Shadow, Outline, Neon, Gradient, Rainbow, Bubble, Fire, Ice
+- 🔤 **18 Font Options**: System fonts + Google Fonts (Inter, Poppins, Roboto, etc.)
+- 🎯 **Custom Colors**: Color picker for custom text colors
+- 📏 **Font Size Control**: Adjustable from 20px to 120px
+- 📱 **Responsive Design**: Perfect for mobile, tablet, and desktop
+- 🚀 **One-Click Copy**: Support for modern and legacy browsers
+- 📸 **Image Export**: PNG/JPG export with multiple sizes and background options
+- ⚡ **Performance Optimized**: Font preloading, lazy loading, GPU acceleration
+- ⌨️ **Keyboard Shortcuts**: Ctrl+C to copy, Ctrl+Enter to cycle styles
 
-## 🚀 在线体验
+## 🚀 Try It Online
 
-访问 [Big Text Generator](https://bigtextgenerator-qp2mb2txl-jewelrydes-projects.vercel.app) 开始使用
+Visit [Big Text Generator](https://bigtextgenerator-qp2mb2txl-jewelrydes-projects.vercel.app) to start using
 
-**自定义域名**：`https://bigtextgenerator.org` (证书申请中)
+**Custom Domain**: `https://bigtextgenerator.org` (SSL certificate in progress)
 
-## 🛠️ 技术栈
+## 🛠️ Tech Stack
 
-- **前端**：纯HTML5 + CSS3 + JavaScript (ES6+)
-- **部署**：Vercel
-- **设计**：现代化响应式设计
-- **兼容性**：支持所有现代浏览器
+- **Frontend**: Pure HTML5 + CSS3 + JavaScript (ES6+)
+- **Deployment**: Vercel
+- **Design**: Modern responsive design
+- **Compatibility**: All modern browsers
 
-## 📖 使用方法
+## 📖 How to Use
 
-1. 在文本框中输入您想要生成的文字
-2. 调整字体大小（20-120px）
-3. 选择喜欢的文字样式
-4. 选择字体类型
-5. 自定义文字颜色
-6. 点击"复制文字"按钮复制结果
+1. Enter your text in the input field
+2. Adjust font size (20-120px)
+3. Choose your preferred text style
+4. Select font family
+5. Customize text color
+6. Click "Copy Text" to copy the result
+7. Use "Export PNG/JPG" to save as image
 
-## 🎨 样式预览
+## 🎨 Style Preview
 
-- **普通**：标准文字显示
-- **粗体**：加粗文字 + 字间距
-- **阴影**：立体阴影效果
-- **轮廓**：透明填充 + 彩色边框
-- **霓虹**：发光霓虹效果
-- **渐变**：多彩渐变流动
-- **彩虹**：彩虹色彩变化
-- **气泡**：浮动气泡效果
-- **火焰**：火焰闪烁效果
-- **冰霜**：冰霜闪烁效果
+- **Normal**: Standard text display
+- **Bold**: Bold text with letter spacing
+- **Shadow**: 3D shadow effect
+- **Outline**: Transparent fill with colored border
+- **Neon**: Glowing neon effect
+- **Gradient**: Multi-color gradient flow
+- **Rainbow**: Rainbow color transition
+- **Bubble**: Floating bubble effect
+- **Fire**: Fire flickering effect
+- **Ice**: Ice shimmer effect
 
-## 📸 图片导出功能
+## 📸 Image Export Features
 
-- **格式支持**：PNG（透明背景）、JPG（有损压缩）
-- **尺寸选项**：1x原始、2x高清、3x超高清、4x 4K
-- **背景选择**：透明、白色、黑色、自定义颜色
-- **高质量渲染**：Canvas技术，完美还原所有特效
+- **Format Support**: PNG (transparent background), JPG (lossy compression)
+- **Size Options**: 1x Original, 2x HD, 3x Ultra HD, 4x 4K
+- **Background Options**: Transparent, White, Black, Custom color
+- **High-Quality Rendering**: Canvas technology, perfect reproduction of all effects
 
-## 🔧 本地运行
+## 🔧 Local Development
 
-1. 克隆仓库：
+1. Clone the repository:
 ```bash
 git clone https://github.com/jewelrydecornerforwork/bigtextgenerator.org.git
 ```
 
-2. 进入项目目录：
+2. Navigate to project directory:
 ```bash
 cd bigtextgenerator.org
 ```
 
-3. 用浏览器打开 `index.html` 文件
+3. Open `index.html` in your browser
 
-## 📄 许可证
+## 📄 License
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
+MIT License - see [LICENSE](LICENSE) file for details
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
-## 📞 联系方式
+## 📞 Contact
 
-如有问题或建议，请通过以下方式联系：
+For questions or suggestions, please contact:
 
-- 提交 [GitHub Issue](  https://github.com/jewelrydecornerforwork/bigtextgenerator.org/issues)
-- 邮箱：jewelrydecornerforwork@gmail.com
+- Submit [GitHub Issue](https://github.com/jewelrydecornerforwork/bigtextgenerator.org/issues)
+- Email: jewelrydecornerforwork@gmail.com
 
 ---
 
-⭐ 如果这个项目对您有帮助，请给个Star支持一下！
+⭐ If this project helps you, please give it a Star!

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Big Text Generator - 大字体生成器 | 免费在线文字特效工具</title>
-    <meta name="description" content="免费的大字体生成器，支持多种文字特效：霓虹、渐变、彩虹、火焰、冰霜等。在线生成炫酷文字，一键复制使用。">
-    <meta name="keywords" content="大字体生成器,文字特效,霓虹文字,渐变文字,彩虹文字,在线工具,免费工具">
+    <title>Big Text Generator - Free Online Text Effects Tool</title>
+    <meta name="description" content="Free big text generator with multiple text effects: neon, gradient, rainbow, fire, ice, and more. Create stunning text online with one-click copy.">
+    <meta name="keywords" content="big text generator,text effects,neon text,gradient text,rainbow text,online tool,free tool">
     <meta name="author" content="Big Text Generator">
-    <meta property="og:title" content="Big Text Generator - 大字体生成器">
-    <meta property="og:description" content="免费的大字体生成器，支持多种文字特效，在线生成炫酷文字">
+    <meta property="og:title" content="Big Text Generator - Free Online Text Effects Tool">
+    <meta property="og:description" content="Free big text generator with multiple text effects, create stunning text online">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bigtextgenerator.org">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Big Text Generator - 大字体生成器">
-    <meta name="twitter:description" content="免费的大字体生成器，支持多种文字特效">
+    <meta name="twitter:title" content="Big Text Generator - Free Online Text Effects Tool">
+    <meta name="twitter:description" content="Free big text generator with multiple text effects">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -23,22 +23,22 @@
 <body>
     <header class="header">
         <h1>Big Text Generator</h1>
-        <p>大字体生成器</p>
+        <p>Create Stunning Text Effects Online</p>
     </header>
 
     <main class="container">
         <section class="input-section">
-            <label for="text-input">输入文字：</label>
+            <label for="text-input">Enter Text:</label>
             <textarea 
                 id="text-input" 
-                placeholder="输入你的文字"
+                placeholder="Type your text here"
                 rows="4"
-            >输入你的文字</textarea>
+            >Hello World</textarea>
         </section>
 
         <section class="controls-section">
             <div class="control-group">
-                <label for="font-size">字体大小：<span id="font-size-value">60px</span></label>
+                <label for="font-size">Font Size: <span id="font-size-value">60px</span></label>
                 <input 
                     type="range" 
                     id="font-size" 
@@ -49,25 +49,25 @@
             </div>
 
             <div class="control-group">
-                <label>文字样式：</label>
+                <label>Text Style:</label>
                 <div class="style-buttons">
-                    <button class="style-btn active" data-style="normal">普通</button>
-                    <button class="style-btn" data-style="bold">粗体</button>
-                    <button class="style-btn" data-style="shadow">阴影</button>
-                    <button class="style-btn" data-style="outline">轮廓</button>
-                    <button class="style-btn" data-style="neon">霓虹</button>
-                    <button class="style-btn" data-style="gradient">渐变</button>
-                    <button class="style-btn" data-style="rainbow">彩虹</button>
-                    <button class="style-btn" data-style="bubble">气泡</button>
-                    <button class="style-btn" data-style="fire">火焰</button>
-                    <button class="style-btn" data-style="ice">冰霜</button>
+                    <button class="style-btn active" data-style="normal">Normal</button>
+                    <button class="style-btn" data-style="bold">Bold</button>
+                    <button class="style-btn" data-style="shadow">Shadow</button>
+                    <button class="style-btn" data-style="outline">Outline</button>
+                    <button class="style-btn" data-style="neon">Neon</button>
+                    <button class="style-btn" data-style="gradient">Gradient</button>
+                    <button class="style-btn" data-style="rainbow">Rainbow</button>
+                    <button class="style-btn" data-style="bubble">Bubble</button>
+                    <button class="style-btn" data-style="fire">Fire</button>
+                    <button class="style-btn" data-style="ice">Ice</button>
                 </div>
             </div>
             
             <div class="control-group">
-                <label for="font-family">字体选择：</label>
+                <label for="font-family">Font Family:</label>
                 <select id="font-family" class="font-selector">
-                    <optgroup label="系统字体">
+                    <optgroup label="System Fonts">
                         <option value="Arial, sans-serif">Arial</option>
                         <option value="'Times New Roman', serif">Times New Roman</option>
                         <option value="'Courier New', monospace">Courier New</option>
@@ -77,7 +77,7 @@
                         <option value="'Verdana', sans-serif">Verdana</option>
                         <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
                     </optgroup>
-                    <optgroup label="Google Fonts - 现代字体">
+                    <optgroup label="Google Fonts - Modern">
                         <option value="'Inter', sans-serif">Inter</option>
                         <option value="'Poppins', sans-serif">Poppins</option>
                         <option value="'Roboto', sans-serif">Roboto</option>
@@ -87,7 +87,7 @@
                         <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
                         <option value="'Ubuntu', sans-serif">Ubuntu</option>
                     </optgroup>
-                    <optgroup label="Google Fonts - 装饰字体">
+                    <optgroup label="Google Fonts - Decorative">
                         <option value="'Oswald', sans-serif">Oswald</option>
                         <option value="'Playfair Display', serif">Playfair Display</option>
                     </optgroup>
@@ -95,35 +95,35 @@
             </div>
             
             <div class="control-group">
-                <label for="text-color">文字颜色：</label>
+                <label for="text-color">Text Color:</label>
                 <input type="color" id="text-color" value="#3b82f6" class="color-picker">
             </div>
         </section>
 
         <section class="preview-section">
-            <h3>预览效果：</h3>
+            <h3>Preview:</h3>
             <div id="text-preview" class="preview-box">
-                <span class="preview-text normal">输入你的文字</span>
+                <span class="preview-text normal">Hello World</span>
             </div>
             <div class="action-buttons">
-                <button id="copy-btn" class="action-btn copy-btn">复制文字</button>
-                <button id="export-png-btn" class="action-btn export-btn">导出PNG</button>
-                <button id="export-jpg-btn" class="action-btn export-btn">导出JPG</button>
+                <button id="copy-btn" class="action-btn copy-btn">Copy Text</button>
+                <button id="export-png-btn" class="action-btn export-btn">Export PNG</button>
+                <button id="export-jpg-btn" class="action-btn export-btn">Export JPG</button>
             </div>
             <div class="export-options" id="export-options" style="display: none;">
-                <label for="export-size">导出尺寸：</label>
+                <label for="export-size">Export Size:</label>
                 <select id="export-size" class="export-selector">
-                    <option value="1">原始尺寸 (1x)</option>
-                    <option value="2" selected>高清 (2x)</option>
-                    <option value="3">超高清 (3x)</option>
+                    <option value="1">Original (1x)</option>
+                    <option value="2" selected>HD (2x)</option>
+                    <option value="3">Ultra HD (3x)</option>
                     <option value="4">4K (4x)</option>
                 </select>
-                <label for="export-bg">背景：</label>
+                <label for="export-bg">Background:</label>
                 <select id="export-bg" class="export-selector">
-                    <option value="transparent">透明背景</option>
-                    <option value="white">白色背景</option>
-                    <option value="black">黑色背景</option>
-                    <option value="custom">自定义颜色</option>
+                    <option value="transparent">Transparent</option>
+                    <option value="white">White</option>
+                    <option value="black">Black</option>
+                    <option value="custom">Custom Color</option>
                 </select>
                 <input type="color" id="custom-bg-color" value="#ffffff" class="color-picker" style="display: none;">
             </div>

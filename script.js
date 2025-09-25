@@ -50,7 +50,7 @@ function init() {
         
     } catch (error) {
         console.error('初始化失败:', error);
-        showError('应用初始化失败，请刷新页面重试');
+        showError('Application initialization failed, please refresh the page');
     }
 }
 
@@ -83,7 +83,7 @@ function preloadFonts() {
 function setDefaultValues() {
     try {
         // 设置默认文字
-        textInput.value = '输入你的文字';
+        textInput.value = 'Hello World';
         
         // 设置默认字体大小
         fontSizeSlider.value = currentFontSize;
@@ -206,14 +206,14 @@ async function handleCopy() {
         const textToCopy = previewText.textContent;
         
         if (!textToCopy || textToCopy.trim() === '') {
-            showMessage('没有文字可复制', 'warning');
+            showMessage('No text to copy', 'warning');
             return;
         }
         
         // 使用现代 Clipboard API
         if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(textToCopy);
-            showMessage('复制成功！', 'success');
+            showMessage('Copied successfully!', 'success');
         } else {
             // 降级方案：使用传统方法
             fallbackCopyTextToClipboard(textToCopy);
@@ -221,7 +221,7 @@ async function handleCopy() {
         
     } catch (error) {
         console.error('复制失败:', error);
-        showMessage('复制失败，请手动选择文字复制', 'error');
+        showMessage('Copy failed, please select text manually', 'error');
     }
 }
 
@@ -243,13 +243,13 @@ function fallbackCopyTextToClipboard(text) {
         document.body.removeChild(textArea);
         
         if (successful) {
-            showMessage('复制成功！', 'success');
+            showMessage('Copied successfully!', 'success');
         } else {
-            throw new Error('execCommand 复制失败');
+            throw new Error('execCommand copy failed');
         }
     } catch (error) {
         console.error('降级复制方案失败:', error);
-        showMessage('复制失败，请手动选择文字复制', 'error');
+        showMessage('Copy failed, please select text manually', 'error');
     }
 }
 
@@ -291,7 +291,7 @@ function cycleThroughStyles() {
         setActiveStyle(nextStyle);
         updatePreviewStyle(nextStyle);
         
-        showMessage(`切换到 ${getStyleDisplayName(nextStyle)} 样式`, 'info');
+        showMessage(`Switched to ${getStyleDisplayName(nextStyle)} style`, 'info');
     } catch (error) {
         console.error('循环切换样式失败:', error);
     }
@@ -357,16 +357,16 @@ function updatePreviewColor(color) {
  */
 function getStyleDisplayName(style) {
     const styleNames = {
-        'normal': '普通',
-        'bold': '粗体',
-        'shadow': '阴影',
-        'outline': '轮廓',
-        'neon': '霓虹',
-        'gradient': '渐变',
-        'rainbow': '彩虹',
-        'bubble': '气泡',
-        'fire': '火焰',
-        'ice': '冰霜'
+        'normal': 'Normal',
+        'bold': 'Bold',
+        'shadow': 'Shadow',
+        'outline': 'Outline',
+        'neon': 'Neon',
+        'gradient': 'Gradient',
+        'rainbow': 'Rainbow',
+        'bubble': 'Bubble',
+        'fire': 'Fire',
+        'ice': 'Ice'
     };
     return styleNames[style] || style;
 }
@@ -377,7 +377,7 @@ function getStyleDisplayName(style) {
 function updatePreviewText(text) {
     try {
         if (previewText) {
-            previewText.textContent = text || '输入你的文字';
+            previewText.textContent = text || 'Hello World';
         }
     } catch (error) {
         console.error('更新预览文字失败:', error);
@@ -540,7 +540,7 @@ function handleCustomBgColorChange(event) {
  */
 async function handleExport(format) {
     try {
-        showMessage('正在生成图片...', 'info');
+        showMessage('Generating image...', 'info');
         
         // 显示导出选项
         exportOptions.style.display = 'block';
@@ -552,7 +552,7 @@ async function handleExport(format) {
         
     } catch (error) {
         console.error('处理导出失败:', error);
-        showMessage('导出失败，请重试', 'error');
+        showMessage('Export failed, please try again', 'error');
     }
 }
 
@@ -623,12 +623,12 @@ function exportImage(format) {
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            showMessage(`${format.toUpperCase()}图片导出成功！`, 'success');
+            showMessage(`${format.toUpperCase()} image exported successfully!`, 'success');
         }, mimeType, quality);
         
     } catch (error) {
         console.error('导出图片失败:', error);
-        showMessage('导出失败，请重试', 'error');
+        showMessage('Export failed, please try again', 'error');
     }
 }
 
