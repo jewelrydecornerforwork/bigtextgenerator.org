@@ -445,6 +445,14 @@ function cycleThroughStyles() {
         setActiveStyle(nextStyle);
         updatePreviewStyle(nextStyle);
         
+        // 清除艺术文字样式状态
+        currentArtisticStyle = null;
+        clearArtisticStyles();
+        
+        // 更新预览文字
+        const text = textInput.value.trim();
+        updatePreviewText(text);
+        
         showMessage(`Switched to ${getStyleDisplayName(nextStyle)} style`, 'info');
     } catch (error) {
         console.error('循环切换样式失败:', error);
@@ -1141,6 +1149,7 @@ function handleResetPreferences() {
             fontSizeValue.textContent = `${currentFontSize}px`;
             
             currentStyle = 'bold';
+            currentArtisticStyle = null;
             setActiveStyle(currentStyle);
             
             fontFamilySelect.value = 'Arial, sans-serif';
@@ -1150,6 +1159,7 @@ function handleResetPreferences() {
             // 更新预览
             updatePreview();
             updatePreviewAnimation('none');
+            updatePreviewText();
             
             // 清除保存的偏好设置
             localStorage.removeItem('bigTextGenerator_preferences');
