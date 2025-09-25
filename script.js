@@ -38,8 +38,11 @@ function init() {
     try {
         // 性能优化：使用requestAnimationFrame
         requestAnimationFrame(() => {
-            // 设置默认值
-            setDefaultValues();
+        // 设置默认值
+        setDefaultValues();
+        
+        // 初始化预览文字
+        updatePreviewText();
             
             // 绑定事件监听器
             bindEventListeners();
@@ -90,8 +93,8 @@ function preloadFonts() {
  */
 function setDefaultValues() {
     try {
-        // 设置默认文字
-        textInput.value = 'Hello World';
+        // 设置默认文字为空
+        textInput.value = '';
         
         // 设置默认字体大小
         fontSizeSlider.value = currentFontSize;
@@ -1104,7 +1107,7 @@ function handleLoadPreferences() {
         const preferences = JSON.parse(saved);
         
         // 应用保存的设置
-        textInput.value = preferences.text || 'Hello World';
+        textInput.value = preferences.text || '';
         currentFontSize = preferences.fontSize || 60;
         fontSizeSlider.value = currentFontSize;
         fontSizeValue.textContent = `${currentFontSize}px`;
@@ -1143,7 +1146,7 @@ function handleResetPreferences() {
     try {
         if (confirm('Are you sure you want to reset all settings to default?')) {
             // 重置所有设置
-            textInput.value = 'Hello World';
+            textInput.value = '';
             currentFontSize = 60;
             fontSizeSlider.value = currentFontSize;
             fontSizeValue.textContent = `${currentFontSize}px`;
