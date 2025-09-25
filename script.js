@@ -183,7 +183,10 @@ function bindEventListeners() {
 function handleTextInput(event) {
     try {
         const text = event.target.value;
-        updatePreviewText(text);
+        // 只有在没有激活艺术文字样式时才更新预览文字
+        if (!currentArtisticStyle) {
+            updatePreviewText(text);
+        }
     } catch (error) {
         console.error('处理文本输入失败:', error);
     }
@@ -1065,6 +1068,7 @@ function handleSavePreferences() {
             text: textInput.value,
             fontSize: currentFontSize,
             style: currentStyle,
+            artisticStyle: currentArtisticStyle,
             fontFamily: fontFamilySelect.value,
             textColor: textColorPicker.value,
             animation: textAnimation.value
@@ -1098,7 +1102,15 @@ function handleLoadPreferences() {
         fontSizeValue.textContent = `${currentFontSize}px`;
         
         currentStyle = preferences.style || 'bold';
-        setActiveStyle(currentStyle);
+        currentArtisticStyle = preferences.artisticStyle || null;
+        
+        if (currentArtisticStyle) {
+            setActiveArtisticStyle(currentArtisticStyle);
+            updatePreviewArtisticStyle(currentArtisticStyle);
+        } else {
+            setActiveStyle(currentStyle);
+            updatePreviewStyle(currentStyle);
+        }
         
         fontFamilySelect.value = preferences.fontFamily || 'Arial, sans-serif';
         textColorPicker.value = preferences.textColor || '#3b82f6';
@@ -1107,6 +1119,7 @@ function handleLoadPreferences() {
         // 更新预览
         updatePreview();
         updatePreviewAnimation(preferences.animation || 'none');
+        updatePreviewText();
         
         showMessage('Preferences loaded successfully!', 'success');
     } catch (error) {
