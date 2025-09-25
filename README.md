@@ -49,7 +49,7 @@
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/your-username/bigtextgenerator.org.git
+git clone https://github.com/jewelrydecornerforwork/bigtextgenerator.org.git
 ```
 
 2. 进入项目目录：
@@ -71,8 +71,8 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 如有问题或建议，请通过以下方式联系：
 
-- 提交 [GitHub Issue](https://github.com/your-username/bigtextgenerator.org/issues)
-- 邮箱：your-email@example.com
+- 提交 [GitHub Issue](https://github.com/jewelrydecornerforwork/bigtextgenerator.org/issues)
+- 邮箱：jewelrydecornerforwork@gmail.com
 
 ---
 
