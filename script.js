@@ -9,8 +9,6 @@ const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
 const styleCopyButtons = document.querySelectorAll('.style-copy-btn');
-const textSizeSlider = document.getElementById('text-size-slider');
-const textSizeValue = document.getElementById('text-size-value');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
 const textColorPicker = document.getElementById('text-color');
@@ -41,16 +39,15 @@ function init() {
         // 设置默认值
         setDefaultValues();
         
-        // 初始化文字大小
-        if (textSizeSlider && textSizeValue) {
-            textSizeValue.textContent = textSizeSlider.value;
-        }
             
             // 绑定事件监听器
             bindEventListeners();
             
             // 初始化预览
             updatePreview();
+            
+            // 初始化所有样式预览
+            updateAllStylePreviews(textInput.value);
             
             // 添加淡入动画
             document.body.classList.add('fade-in');
@@ -131,10 +128,6 @@ function bindEventListeners() {
             button.addEventListener('click', handleStyleCopy);
         });
         
-        // 文字大小滑块
-        if (textSizeSlider) {
-            textSizeSlider.addEventListener('input', handleTextSizeChange);
-        }
         
         
         // 复制按钮
@@ -196,8 +189,23 @@ function handleTextInput(event) {
     try {
         const text = event.target.value;
         updatePreviewText(text);
+        updateAllStylePreviews(text);
     } catch (error) {
         console.error('处理文本输入失败:', error);
+    }
+}
+
+/**
+ * 更新所有样式预览的文字
+ */
+function updateAllStylePreviews(text) {
+    try {
+        const stylePreviews = document.querySelectorAll('.style-preview');
+        stylePreviews.forEach(preview => {
+            preview.textContent = text || 'Type something here to try a font style';
+        });
+    } catch (error) {
+        console.error('更新样式预览失败:', error);
     }
 }
 
@@ -264,25 +272,6 @@ async function handleStyleCopy(event) {
     }
 }
 
-/**
- * 处理文字大小变化
- */
-function handleTextSizeChange(event) {
-    try {
-        const size = event.target.value;
-        if (textSizeValue) {
-            textSizeValue.textContent = size;
-        }
-        
-        // 更新所有样式预览的字体大小
-        const stylePreviews = document.querySelectorAll('.style-preview');
-        stylePreviews.forEach(preview => {
-            preview.style.fontSize = `${size}px`;
-        });
-    } catch (error) {
-        console.error('处理文字大小变化失败:', error);
-    }
-}
 
 
 /**
