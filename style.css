@@ -471,24 +471,6 @@ body {
     border-color: #9ca3af;
 }
 
-.style-copy-btn.primary {
-    background: #10b981;
-    border-color: #10b981;
-    color: white;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.style-copy-btn.primary:hover {
-    background: #059669;
-    border-color: #059669;
-}
-
-.copy-icon {
-    font-size: 16px;
-}
 
 /* 操作按钮 */
 .action-btn {
