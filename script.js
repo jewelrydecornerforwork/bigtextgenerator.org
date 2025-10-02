@@ -8,8 +8,9 @@ const textInput = document.getElementById('text-input');
 const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
-const artisticCopyButtons = document.querySelectorAll('.artistic-copy-btn');
-const previewText = document.querySelector('.preview-text');
+const styleCopyButtons = document.querySelectorAll('.style-copy-btn');
+const textSizeSlider = document.getElementById('text-size-slider');
+const textSizeValue = document.getElementById('text-size-value');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
 const textColorPicker = document.getElementById('text-color');
@@ -39,6 +40,11 @@ function init() {
         requestAnimationFrame(() => {
         // 设置默认值
         setDefaultValues();
+        
+        // 初始化文字大小
+        if (textSizeSlider && textSizeValue) {
+            textSizeValue.textContent = textSizeSlider.value;
+        }
             
             // 绑定事件监听器
             bindEventListeners();
@@ -120,10 +126,15 @@ function bindEventListeners() {
             button.addEventListener('click', handleStyleChange);
         });
         
-        // 艺术文字复制按钮点击
-        artisticCopyButtons.forEach(button => {
-            button.addEventListener('click', handleArtisticCopy);
+        // 样式复制按钮点击
+        styleCopyButtons.forEach(button => {
+            button.addEventListener('click', handleStyleCopy);
         });
+        
+        // 文字大小滑块
+        if (textSizeSlider) {
+            textSizeSlider.addEventListener('input', handleTextSizeChange);
+        }
         
         
         // 复制按钮
@@ -221,16 +232,16 @@ function handleStyleChange(event) {
 }
 
 /**
- * 处理艺术文字复制
+ * 处理样式复制
  */
-async function handleArtisticCopy(event) {
+async function handleStyleCopy(event) {
     try {
         const style = event.target.dataset.style;
-        const previewItem = event.target.closest('.artistic-preview-item');
-        const textPreview = previewItem.querySelector('.artistic-text-preview');
+        const styleCard = event.target.closest('.artistic-style-card');
+        const stylePreview = styleCard.querySelector('.style-preview');
         
-        if (textPreview) {
-            const textToCopy = textPreview.textContent;
+        if (stylePreview) {
+            const textToCopy = stylePreview.textContent;
             
             if (!textToCopy || textToCopy.trim() === '') {
                 showMessage('No text to copy', 'warning');
@@ -248,8 +259,28 @@ async function handleArtisticCopy(event) {
             }
         }
     } catch (error) {
-        console.error('处理艺术文字复制失败:', error);
+        console.error('处理样式复制失败:', error);
         showMessage('Failed to copy text', 'error');
+    }
+}
+
+/**
+ * 处理文字大小变化
+ */
+function handleTextSizeChange(event) {
+    try {
+        const size = event.target.value;
+        if (textSizeValue) {
+            textSizeValue.textContent = size;
+        }
+        
+        // 更新所有样式预览的字体大小
+        const stylePreviews = document.querySelectorAll('.style-preview');
+        stylePreviews.forEach(preview => {
+            preview.style.fontSize = `${size}px`;
+        });
+    } catch (error) {
+        console.error('处理文字大小变化失败:', error);
     }
 }
 
@@ -540,7 +571,9 @@ function getStyleDisplayName(style) {
         'urban-square': 'Urban Square',
         'modern-clarity': 'Modern Clarity',
         'vintage-script': 'Vintage Script',
-        'symbolic-essence': 'Symbolic Essence'
+        'symbolic-essence': 'Symbolic Essence',
+        'harmonic-essence': 'Harmonic Essence',
+        'classic-reverie': 'Classic Reverie'
     };
     return styleNames[style] || style;
 }

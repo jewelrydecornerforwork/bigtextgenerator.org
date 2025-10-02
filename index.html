@@ -132,99 +132,6 @@
                 </div>
             </div>
 
-            <div class="sidebar-section">
-                <h3>Artistic Text Styles</h3>
-                <div class="artistic-preview-list">
-                    <!-- Gothic Reverie -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Gothic Reverie</h4>
-                            <div class="artistic-text-preview gothic-reverie">Type something here to try a font style</div>
-                        </div>
-                        <button class="artistic-copy-btn primary" data-style="gothic-reverie">
-                            <span class="copy-icon">📋</span>
-                            COPY FONT STYLE
-                        </button>
-                    </div>
-
-                    <!-- Gentle Calligraphy -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Gentle Calligraphy</h4>
-                            <div class="artistic-text-preview gentle-calligraphy">Type something here to try a font style</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="gentle-calligraphy">
-                            Copy font style
-                        </button>
-                    </div>
-
-                    <!-- Gothic Intrigue -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Gothic Intrigue</h4>
-                            <div class="artistic-text-preview gothic-intrigue">Type something here to try a font style</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="gothic-intrigue">
-                            Copy font style
-                        </button>
-                    </div>
-
-                    <!-- Monospace Elegance -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Monospace Elegance</h4>
-                            <div class="artistic-text-preview monospace-elegance">Type something here to try a font style</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="monospace-elegance">
-                            Copy font style
-                        </button>
-                    </div>
-
-                    <!-- Modern Blockade -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Modern Blockade</h4>
-                            <div class="artistic-text-preview modern-blockade">TYPE SOMETHING HERE TO TRY A FONT STYLE</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="modern-blockade">
-                            Copy font style
-                        </button>
-                    </div>
-
-                    <!-- Urban Square Essence -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Urban Square Essence</h4>
-                            <div class="artistic-text-preview urban-square">TYPE SOMETHING HERE TO TRY A FONT STYLE</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="urban-square">
-                            Copy font style
-                        </button>
-                    </div>
-
-                    <!-- Modern Clarity -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Modern Clarity</h4>
-                            <div class="artistic-text-preview modern-clarity">Type something here to try a font style</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="modern-clarity">
-                            Copy font style
-                        </button>
-                    </div>
-
-                    <!-- Symbolic Essence -->
-                    <div class="artistic-preview-item">
-                        <div class="artistic-preview-content">
-                            <h4 class="artistic-style-name">Symbolic Essence</h4>
-                            <div class="artistic-text-preview symbolic-essence">【T】【y】【p】【e】【s】【o】【m】【e】【t】【h】【i】【n】【g】【h】【e】【r】【e】【t】【o】【t】【r】【y】【a】【f】【o】【n】【t】【s】【t】【y】【l】【e】</div>
-                        </div>
-                        <button class="artistic-copy-btn" data-style="symbolic-essence">
-                            Copy font style
-                        </button>
-                    </div>
-                </div>
-            </div>
 
             <div class="sidebar-section">
                 <h3>Animation</h3>
@@ -247,51 +154,110 @@
 
         <!-- Main Content Area -->
         <div class="content-area">
-            <!-- Preview Section -->
-            <section class="preview-section">
-                <div class="preview-header">
-                    <h2>Preview</h2>
-                    <div class="preview-actions">
-                        <button id="copy-btn" class="action-btn primary">Copy Text</button>
-                        <div class="export-dropdown">
-                            <button class="action-btn secondary dropdown-toggle">Export</button>
-                            <div class="dropdown-menu">
-                                <button class="dropdown-item" id="export-png-btn">Export PNG</button>
-                                <button class="dropdown-item" id="export-jpg-btn">Export JPG</button>
-                                <button class="dropdown-item" id="export-svg-btn">Export SVG</button>
-                                <button class="dropdown-item" id="export-pdf-btn">Export PDF</button>
-                            </div>
-                        </div>
+            <!-- Main Preview Section -->
+            <section class="main-preview-section">
+                <div class="main-preview-header">
+                    <h2>Results from 'Big text generator'</h2>
+                    <div class="text-size-control">
+                        <label for="text-size-slider">Text size</label>
+                        <input type="range" id="text-size-slider" min="12" max="72" value="24" class="size-slider">
+                        <span id="text-size-value">24</span>
                     </div>
                 </div>
                 
-                <div class="preview-container">
-                    <div id="text-preview" class="preview-box">
-                        <span class="preview-text normal">Hello World</span>
+                <div class="artistic-styles-list">
+                    <!-- Gothic Reverie -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Gothic Reverie</h3>
+                            <div class="style-preview gothic-reverie">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="gothic-reverie">Copy font style</button>
                     </div>
-                </div>
 
-                <!-- Export Options -->
-                <div class="export-options" id="export-options" style="display: none;">
-                    <div class="export-option">
-                        <label for="export-size">Export Size:</label>
-                        <select id="export-size" class="control-select">
-                            <option value="1">Original (1x)</option>
-                            <option value="2" selected>HD (2x)</option>
-                            <option value="3">Ultra HD (3x)</option>
-                            <option value="4">4K (4x)</option>
-                        </select>
+                    <!-- Gentle Calligraphy -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Gentle Calligraphy</h3>
+                            <div class="style-preview gentle-calligraphy">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="gentle-calligraphy">Copy font style</button>
                     </div>
-                    <div class="export-option">
-                        <label for="export-bg">Background:</label>
-                        <select id="export-bg" class="control-select">
-                            <option value="transparent">Transparent</option>
-                            <option value="white">White</option>
-                            <option value="black">Black</option>
-                            <option value="custom">Custom Color</option>
-                        </select>
+
+                    <!-- Gothic Intrigue -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Gothic Intrigue</h3>
+                            <div class="style-preview gothic-intrigue">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn primary" data-style="gothic-intrigue">
+                            <span class="copy-icon">📋</span>
+                            COPY FONT STYLE
+                        </button>
                     </div>
-                    <input type="color" id="custom-bg-color" value="#ffffff" class="color-picker" style="display: none;">
+
+                    <!-- Monospace Elegance -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Monospace Elegance</h3>
+                            <div class="style-preview monospace-elegance">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="monospace-elegance">Copy font style</button>
+                    </div>
+
+                    <!-- Modern Blockade -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Modern Blockade</h3>
+                            <div class="style-preview modern-blockade">TYPE SOMETHING HERE TO TRY A FONT STYLE</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="modern-blockade">Copy font style</button>
+                    </div>
+
+                    <!-- Urban Square Essence -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Urban Square Essence</h3>
+                            <div class="style-preview urban-square">TYPE SOMETHING HERE TO TRY A FONT STYLE</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="urban-square">Copy font style</button>
+                    </div>
+
+                    <!-- Modern Clarity -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Modern Clarity</h3>
+                            <div class="style-preview modern-clarity">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="modern-clarity">Copy font style</button>
+                    </div>
+
+                    <!-- Symbolic Essence -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Symbolic Essence</h3>
+                            <div class="style-preview symbolic-essence">【T】【y】【p】【e】【s】【o】【m】【e】【t】【h】【i】【n】【g】【h】【e】【r】【e】【t】【o】【t】【r】【y】【a】【f】【o】【n】【t】【s】【t】【y】【l】【e】</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="symbolic-essence">Copy font style</button>
+                    </div>
+
+                    <!-- Harmonic Essence -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Harmonic Essence</h3>
+                            <div class="style-preview harmonic-essence">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="harmonic-essence">Copy font style</button>
+                    </div>
+
+                    <!-- Classic Reverie -->
+                    <div class="artistic-style-card">
+                        <div class="style-content">
+                            <h3 class="style-name">Classic Reverie</h3>
+                            <div class="style-preview classic-reverie">Type something here to try a font style</div>
+                        </div>
+                        <button class="style-copy-btn" data-style="classic-reverie">Copy font style</button>
+                    </div>
                 </div>
             </section>
 
