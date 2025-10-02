@@ -9,7 +9,7 @@ const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
 const artisticCopyButtons = document.querySelectorAll('.artistic-copy-btn');
-const previewText = document.querySelector('.main-preview-text');
+const previewText = document.querySelector('.preview-text');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
 const textColorPicker = document.getElementById('text-color');
@@ -125,19 +125,10 @@ function bindEventListeners() {
             button.addEventListener('click', handleArtisticCopy);
         });
         
-        // 艺术文字样式应用到主预览
-        artisticCopyButtons.forEach(button => {
-            button.addEventListener('dblclick', handleArtisticStyleApply);
-        });
         
         // 复制按钮
         copyBtn.addEventListener('click', handleCopy);
         
-        // 主复制按钮
-        const mainCopyBtn = document.getElementById('main-copy-btn');
-        if (mainCopyBtn) {
-            mainCopyBtn.addEventListener('click', handleMainCopy);
-        }
         
         // 字体选择器
         fontFamilySelect.addEventListener('change', handleFontFamilyChange);
@@ -262,58 +253,6 @@ async function handleArtisticCopy(event) {
     }
 }
 
-/**
- * 处理主预览复制
- */
-async function handleMainCopy() {
-    try {
-        if (previewText) {
-            const textToCopy = previewText.textContent;
-            
-            if (!textToCopy || textToCopy.trim() === '') {
-                showMessage('No text to copy', 'warning');
-                return;
-            }
-            
-            // 使用现代 Clipboard API
-            if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(textToCopy);
-                showMessage('Copied your text successfully!', 'success');
-            } else {
-                // 降级方案：使用传统方法
-                fallbackCopyTextToClipboard(textToCopy);
-                showMessage('Copied your text successfully!', 'success');
-            }
-        }
-    } catch (error) {
-        console.error('处理主预览复制失败:', error);
-        showMessage('Failed to copy text', 'error');
-    }
-}
-
-/**
- * 处理艺术文字样式应用到主预览
- */
-function handleArtisticStyleApply(event) {
-    try {
-        const style = event.target.dataset.style;
-        if (style) {
-            // 清除普通文字效果
-            clearNormalStyles();
-            
-            // 应用艺术文字样式到主预览
-            updatePreviewArtisticStyle(style);
-            
-            // 设置激活的艺术文字样式按钮
-            setActiveArtisticStyle(style);
-            
-            showMessage(`Applied "${style}" style to your text!`, 'success');
-        }
-    } catch (error) {
-        console.error('处理艺术文字样式应用失败:', error);
-        showMessage('Failed to apply style', 'error');
-    }
-}
 
 /**
  * 设置激活的样式按钮
