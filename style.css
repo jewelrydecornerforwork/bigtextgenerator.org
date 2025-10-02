@@ -427,6 +427,174 @@ body {
     align-items: center;
 }
 
+/* 主预览项 */
+.main-preview-item {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.main-preview-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.main-preview-content {
+    margin-bottom: 16px;
+}
+
+.main-preview-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 12px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.main-preview-text-container {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: var(--radius-md);
+    padding: 40px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-preview-text {
+    font-size: 60px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    word-wrap: break-word;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* 主预览文字艺术样式 */
+.main-preview-text.gothic-reverie {
+    font-family: 'Playfair Display', serif;
+    color: #6b46c1;
+    font-weight: 400;
+    text-shadow: 
+        2px 2px 0px #4c1d95,
+        4px 4px 8px rgba(107, 70, 193, 0.3);
+    letter-spacing: 1px;
+    transform: skew(-2deg);
+}
+
+.main-preview-text.gentle-calligraphy {
+    font-family: 'Dancing Script', cursive;
+    color: #059669;
+    font-weight: 600;
+    text-shadow: 
+        1px 1px 2px rgba(5, 150, 105, 0.3),
+        0 0 10px rgba(5, 150, 105, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.main-preview-text.gothic-intrigue {
+    font-family: 'Playfair Display', serif;
+    color: #dc2626;
+    font-weight: 700;
+    text-shadow: 
+        3px 3px 0px #991b1b,
+        6px 6px 12px rgba(220, 38, 38, 0.4);
+    letter-spacing: 2px;
+    transform: skew(1deg);
+}
+
+.main-preview-text.monospace-elegance {
+    font-family: 'Courier New', monospace;
+    color: #374151;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 
+        1px 1px 0px #6b7280,
+        2px 2px 4px rgba(55, 65, 81, 0.2);
+}
+
+.main-preview-text.modern-blockade {
+    font-family: 'Impact', sans-serif;
+    color: #1f2937;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 
+        2px 2px 0px #ffffff,
+        4px 4px 0px #6b7280;
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.main-preview-text.urban-square {
+    font-family: 'Arial Black', sans-serif;
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 
+        2px 2px 0px #1f2937,
+        4px 4px 0px #374151;
+    background: #1f2937;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.main-preview-text.modern-clarity {
+    font-family: 'Inter', sans-serif;
+    color: #3b82f6;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 1px;
+    text-shadow: 
+        1px 1px 2px rgba(59, 130, 246, 0.3);
+}
+
+.main-preview-text.symbolic-essence {
+    font-family: 'Arial', sans-serif;
+    color: #1f2937;
+    font-weight: 400;
+    letter-spacing: 0px;
+    font-size: 48px;
+    line-height: 1.2;
+}
+
+.main-copy-btn {
+    background: #10b981;
+    border: 1px solid #10b981;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.main-copy-btn:hover {
+    background: #059669;
+    border-color: #059669;
+}
+
+.main-copy-btn .copy-icon {
+    font-size: 16px;
+}
+
 /* 操作按钮 */
 .action-btn {
     padding: 10px 20px;
@@ -1174,6 +1342,23 @@ body {
     
     .preview-section {
         padding: 16px;
+    }
+    
+    .main-preview-item {
+        padding: 16px;
+    }
+    
+    .main-preview-text-container {
+        padding: 24px;
+        min-height: 150px;
+    }
+    
+    .main-preview-text {
+        font-size: 40px;
+    }
+    
+    .main-preview-text.symbolic-essence {
+        font-size: 32px;
     }
     
     .preferences-section {
