@@ -285,9 +285,10 @@ body {
     gap: 8px;
 }
 
-.artistic-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+.artistic-preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .effect-btn {
@@ -316,26 +317,77 @@ body {
     box-shadow: var(--shadow-md);
 }
 
-.artistic-btn {
-    font-size: 11px;
-    padding: 8px 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 1px solid #667eea;
+.artistic-preview-item {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.artistic-preview-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.artistic-preview-content {
+    margin-bottom: 12px;
+}
+
+.artistic-style-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 8px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.artistic-text-preview {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #1f2937;
+    word-wrap: break-word;
+    min-height: 24px;
+}
+
+.artistic-copy-btn {
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    width: 100%;
+}
+
+.artistic-copy-btn:hover {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+}
+
+.artistic-copy-btn.primary {
+    background: #10b981;
+    border-color: #10b981;
     color: white;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
-.artistic-btn:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    border-color: #5a6fd8;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+.artistic-copy-btn.primary:hover {
+    background: #059669;
+    border-color: #059669;
 }
 
-.artistic-btn.active {
-    background: linear-gradient(135deg, #4c63d2 0%, #5d3a7e 100%);
-    border-color: #4c63d2;
-    box-shadow: var(--shadow-lg);
+.copy-icon {
+    font-size: 14px;
 }
 
 /* 内容区域 */
@@ -655,6 +707,97 @@ body {
         4px 4px 8px rgba(146, 64, 14, 0.2);
     letter-spacing: 1px;
     transform: rotate(1deg);
+}
+
+/* 艺术文字预览样式 */
+.artistic-text-preview.gothic-reverie {
+    font-family: 'Playfair Display', serif;
+    color: #6b46c1;
+    font-weight: 400;
+    text-shadow: 
+        2px 2px 0px #4c1d95,
+        4px 4px 8px rgba(107, 70, 193, 0.3);
+    letter-spacing: 1px;
+    transform: skew(-2deg);
+}
+
+.artistic-text-preview.gentle-calligraphy {
+    font-family: 'Dancing Script', cursive;
+    color: #059669;
+    font-weight: 600;
+    text-shadow: 
+        1px 1px 2px rgba(5, 150, 105, 0.3),
+        0 0 10px rgba(5, 150, 105, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.artistic-text-preview.gothic-intrigue {
+    font-family: 'Playfair Display', serif;
+    color: #dc2626;
+    font-weight: 700;
+    text-shadow: 
+        3px 3px 0px #991b1b,
+        6px 6px 12px rgba(220, 38, 38, 0.4);
+    letter-spacing: 2px;
+    transform: skew(1deg);
+}
+
+.artistic-text-preview.monospace-elegance {
+    font-family: 'Courier New', monospace;
+    color: #374151;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 
+        1px 1px 0px #6b7280,
+        2px 2px 4px rgba(55, 65, 81, 0.2);
+}
+
+.artistic-text-preview.modern-blockade {
+    font-family: 'Impact', sans-serif;
+    color: #1f2937;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 
+        2px 2px 0px #ffffff,
+        4px 4px 0px #6b7280;
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.artistic-text-preview.urban-square {
+    font-family: 'Arial Black', sans-serif;
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 
+        2px 2px 0px #1f2937,
+        4px 4px 0px #374151;
+    background: #1f2937;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.artistic-text-preview.modern-clarity {
+    font-family: 'Inter', sans-serif;
+    color: #3b82f6;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 1px;
+    text-shadow: 
+        1px 1px 2px rgba(59, 130, 246, 0.3);
+}
+
+.artistic-text-preview.symbolic-essence {
+    font-family: 'Arial', sans-serif;
+    color: #1f2937;
+    font-weight: 400;
+    letter-spacing: 0px;
+    font-size: 14px;
+    line-height: 1.2;
 }
 
 /* 动画效果 */
@@ -998,8 +1141,12 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    .artistic-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .artistic-preview-list {
+        gap: 12px;
+    }
+    
+    .artistic-preview-item {
+        padding: 12px;
     }
     
     .preferences-actions {
@@ -1037,13 +1184,21 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .artistic-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .artistic-preview-list {
+        gap: 12px;
     }
     
-    .artistic-btn {
-        font-size: 10px;
-        padding: 6px 8px;
+    .artistic-preview-item {
+        padding: 12px;
+    }
+    
+    .artistic-copy-btn {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    
+    .artistic-text-preview {
+        font-size: 14px;
     }
     
     .preview-text {

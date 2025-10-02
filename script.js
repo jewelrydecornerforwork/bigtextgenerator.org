@@ -8,7 +8,7 @@ const textInput = document.getElementById('text-input');
 const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
-const artisticButtons = document.querySelectorAll('.artistic-btn');
+const artisticCopyButtons = document.querySelectorAll('.artistic-copy-btn');
 const previewText = document.querySelector('.preview-text');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
@@ -120,9 +120,9 @@ function bindEventListeners() {
             button.addEventListener('click', handleStyleChange);
         });
         
-        // 艺术文字效果按钮点击
-        artisticButtons.forEach(button => {
-            button.addEventListener('click', handleArtisticStyleChange);
+        // 艺术文字复制按钮点击
+        artisticCopyButtons.forEach(button => {
+            button.addEventListener('click', handleArtisticCopy);
         });
         
         // 复制按钮
@@ -219,18 +219,35 @@ function handleStyleChange(event) {
 }
 
 /**
- * 处理艺术文字样式变化
+ * 处理艺术文字复制
  */
-function handleArtisticStyleChange(event) {
+async function handleArtisticCopy(event) {
     try {
         const style = event.target.dataset.style;
-        setActiveArtisticStyle(style);
-        updatePreviewArtisticStyle(style);
+        const previewItem = event.target.closest('.artistic-preview-item');
+        const textPreview = previewItem.querySelector('.artistic-text-preview');
         
-        // 清除普通文字效果
-        clearNormalStyles();
+        if (textPreview) {
+            const textToCopy = textPreview.textContent;
+            
+            if (!textToCopy || textToCopy.trim() === '') {
+                showMessage('No text to copy', 'warning');
+                return;
+            }
+            
+            // 使用现代 Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(textToCopy);
+                showMessage(`Copied "${style}" style text!`, 'success');
+            } else {
+                // 降级方案：使用传统方法
+                fallbackCopyTextToClipboard(textToCopy);
+                showMessage(`Copied "${style}" style text!`, 'success');
+            }
+        }
     } catch (error) {
-        console.error('处理艺术文字样式变化失败:', error);
+        console.error('处理艺术文字复制失败:', error);
+        showMessage('Failed to copy text', 'error');
     }
 }
 
@@ -261,7 +278,7 @@ function setActiveStyle(style) {
 function setActiveArtisticStyle(style) {
     try {
         // 移除所有艺术文字按钮的激活状态
-        artisticButtons.forEach(button => {
+        artisticCopyButtons.forEach(button => {
             button.classList.remove('active');
         });
         
