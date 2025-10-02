@@ -4,7 +4,6 @@
  */
 
 // DOM 元素引用
-const textInput = document.getElementById('text-input');
 const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
@@ -49,7 +48,7 @@ function init() {
             updatePreview();
             
             // 初始化所有样式预览
-            updateAllStylePreviews(textInput.value);
+            updateAllStylePreviews(heroTextInput ? heroTextInput.value : '');
             
             // 添加淡入动画
             document.body.classList.add('fade-in');
@@ -114,9 +113,6 @@ function setDefaultValues() {
  */
 function bindEventListeners() {
     try {
-        // 文本输入实时更新
-        textInput.addEventListener('input', handleTextInput);
-        
         // Hero区域文本输入
         if (heroTextInput) {
             heroTextInput.addEventListener('input', handleHeroTextInput);
@@ -194,18 +190,6 @@ function bindEventListeners() {
     }
 }
 
-/**
- * 处理文本输入变化
- */
-function handleTextInput(event) {
-    try {
-        const text = event.target.value;
-        updatePreviewText(text);
-        updateAllStylePreviews(text);
-    } catch (error) {
-        console.error('处理文本输入失败:', error);
-    }
-}
 
 /**
  * 更新所有样式预览的文字
@@ -227,10 +211,6 @@ function updateAllStylePreviews(text) {
 function handleHeroTextInput(event) {
     try {
         const text = event.target.value;
-        // 同步到侧边栏的文本输入框
-        if (textInput) {
-            textInput.value = text;
-        }
         // 更新所有样式预览
         updateAllStylePreviews(text);
     } catch (error) {
@@ -258,12 +238,9 @@ function handleSurpriseMe() {
         
         const randomText = surpriseTexts[Math.floor(Math.random() * surpriseTexts.length)];
         
-        // 更新两个输入框
+        // 更新Hero输入框
         if (heroTextInput) {
             heroTextInput.value = randomText;
-        }
-        if (textInput) {
-            textInput.value = randomText;
         }
         
         // 更新所有样式预览
