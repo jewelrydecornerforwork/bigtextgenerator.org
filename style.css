@@ -66,34 +66,6 @@ body {
     margin: 0 auto;
 }
 
-/* Breadcrumb Navigation */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    font-size: 14px;
-}
-
-.breadcrumb-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breadcrumb-link:hover {
-    color: white;
-}
-
-.breadcrumb-separator {
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0 8px;
-}
-
-.breadcrumb-current {
-    color: white;
-    font-weight: 500;
-}
 
 /* Hero Title */
 .hero-title {
