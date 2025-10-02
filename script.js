@@ -9,6 +9,8 @@ const fontSizeSlider = document.getElementById('font-size');
 const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
 const styleCopyButtons = document.querySelectorAll('.style-copy-btn');
+const heroTextInput = document.getElementById('hero-text-input');
+const surpriseBtn = document.querySelector('.surprise-btn');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
 const textColorPicker = document.getElementById('text-color');
@@ -115,6 +117,16 @@ function bindEventListeners() {
         // 文本输入实时更新
         textInput.addEventListener('input', handleTextInput);
         
+        // Hero区域文本输入
+        if (heroTextInput) {
+            heroTextInput.addEventListener('input', handleHeroTextInput);
+        }
+        
+        // 惊喜按钮
+        if (surpriseBtn) {
+            surpriseBtn.addEventListener('click', handleSurpriseMe);
+        }
+        
         // 字体大小滑块
         fontSizeSlider.addEventListener('input', handleFontSizeChange);
         
@@ -206,6 +218,60 @@ function updateAllStylePreviews(text) {
         });
     } catch (error) {
         console.error('更新样式预览失败:', error);
+    }
+}
+
+/**
+ * 处理Hero区域文本输入
+ */
+function handleHeroTextInput(event) {
+    try {
+        const text = event.target.value;
+        // 同步到侧边栏的文本输入框
+        if (textInput) {
+            textInput.value = text;
+        }
+        // 更新所有样式预览
+        updateAllStylePreviews(text);
+    } catch (error) {
+        console.error('处理Hero文本输入失败:', error);
+    }
+}
+
+/**
+ * 处理惊喜按钮点击
+ */
+function handleSurpriseMe() {
+    try {
+        const surpriseTexts = [
+            'Hello World',
+            'Amazing Text',
+            'Creative Design',
+            'Beautiful Typography',
+            'Font Magic',
+            'Style It Up',
+            'Text Effects',
+            'Design Inspiration',
+            'Creative Writing',
+            'Typography Art'
+        ];
+        
+        const randomText = surpriseTexts[Math.floor(Math.random() * surpriseTexts.length)];
+        
+        // 更新两个输入框
+        if (heroTextInput) {
+            heroTextInput.value = randomText;
+        }
+        if (textInput) {
+            textInput.value = randomText;
+        }
+        
+        // 更新所有样式预览
+        updateAllStylePreviews(randomText);
+        
+        showMessage('Surprise text applied!', 'success');
+    } catch (error) {
+        console.error('处理惊喜按钮失败:', error);
     }
 }
 

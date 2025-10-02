@@ -21,19 +21,45 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
 </head>
 <body>
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <h1>Big Text Generator</h1>
-                <span class="nav-subtitle">Create Stunning Text Effects</span>
-            </div>
-            <div class="nav-actions">
-                <button class="nav-btn" id="help-btn">Help</button>
-                <button class="nav-btn primary" id="premium-btn">Premium</button>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <!-- Breadcrumb Navigation -->
+            <nav class="breadcrumb">
+                <a href="#" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <a href="#" class="breadcrumb-link">Tools</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Big text generator</span>
+            </nav>
+            
+            <!-- Main Title -->
+            <h1 class="hero-title">Big text generator</h1>
+            <p class="hero-description">Enhance your daily fonts with our Big text generator and copy paste them wherever you would like for free</p>
+            
+            <!-- Control Bar -->
+            <div class="control-bar">
+                <div class="font-selector">
+                    <select class="font-dropdown">
+                        <option>All fonts</option>
+                        <option>Serif Fonts</option>
+                        <option>Sans-serif Fonts</option>
+                        <option>Script Fonts</option>
+                        <option>Display Fonts</option>
+                    </select>
+                </div>
+                
+                <div class="text-input-container">
+                    <input type="text" class="hero-text-input" placeholder="Type something here to try a font style" id="hero-text-input">
+                </div>
+                
+                <button class="surprise-btn">
+                    <span class="surprise-icon">✨</span>
+                    Surprise me
+                </button>
             </div>
         </div>
-    </nav>
+    </section>
 
     <!-- Main Content -->
     <main class="main-container">
