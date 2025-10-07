@@ -9,6 +9,8 @@ const fontSizeValue = document.getElementById('font-size-value');
 const styleButtons = document.querySelectorAll('.effect-btn');
 const styleCopyButtons = document.querySelectorAll('.style-copy-btn');
 const heroTextInput = document.getElementById('hero-text-input');
+const textInput = document.getElementById('text-input'); // 新增：主预览文本输入
+const previewText = document.getElementById('preview-text'); // 新增：主预览文本元素
 const surpriseBtn = document.querySelector('.surprise-btn');
 const copyBtn = document.getElementById('copy-btn');
 const fontFamilySelect = document.getElementById('font-family');
@@ -94,11 +96,20 @@ function preloadFonts() {
 function setDefaultValues() {
     try {
         // 设置默认文字为空
-        textInput.value = '';
+        if (textInput) {
+            textInput.value = '';
+        }
+        if (heroTextInput) {
+            heroTextInput.value = '';
+        }
         
         // 设置默认字体大小
-        fontSizeSlider.value = currentFontSize;
-        fontSizeValue.textContent = `${currentFontSize}px`;
+        if (fontSizeSlider) {
+            fontSizeSlider.value = currentFontSize;
+        }
+        if (fontSizeValue) {
+            fontSizeValue.textContent = `${currentFontSize}px`;
+        }
         
         // 设置默认样式为粗体
         setActiveStyle('bold');
@@ -118,13 +129,20 @@ function bindEventListeners() {
             heroTextInput.addEventListener('input', handleHeroTextInput);
         }
         
+        // 主预览文本输入
+        if (textInput) {
+            textInput.addEventListener('input', handleMainTextInput);
+        }
+        
         // 惊喜按钮
         if (surpriseBtn) {
             surpriseBtn.addEventListener('click', handleSurpriseMe);
         }
         
         // 字体大小滑块
-        fontSizeSlider.addEventListener('input', handleFontSizeChange);
+        if (fontSizeSlider) {
+            fontSizeSlider.addEventListener('input', handleFontSizeChange);
+        }
         
         // 效果按钮点击
         styleButtons.forEach(button => {
@@ -136,35 +154,58 @@ function bindEventListeners() {
             button.addEventListener('click', handleStyleCopy);
         });
         
-        
-        
         // 复制按钮
-        copyBtn.addEventListener('click', handleCopy);
-        
+        if (copyBtn) {
+            copyBtn.addEventListener('click', handleCopy);
+        }
         
         // 字体选择器
-        fontFamilySelect.addEventListener('change', handleFontFamilyChange);
+        if (fontFamilySelect) {
+            fontFamilySelect.addEventListener('change', handleFontFamilyChange);
+        }
         
         // 颜色选择器
-        textColorPicker.addEventListener('change', handleTextColorChange);
+        if (textColorPicker) {
+            textColorPicker.addEventListener('change', handleTextColorChange);
+        }
         
         // 导出按钮
-        exportPngBtn.addEventListener('click', () => handleExport('png'));
-        exportJpgBtn.addEventListener('click', () => handleExport('jpg'));
-        exportSvgBtn.addEventListener('click', () => handleExport('svg'));
-        exportPdfBtn.addEventListener('click', () => handleExport('pdf'));
+        if (exportPngBtn) {
+            exportPngBtn.addEventListener('click', () => handleExport('png'));
+        }
+        if (exportJpgBtn) {
+            exportJpgBtn.addEventListener('click', () => handleExport('jpg'));
+        }
+        if (exportSvgBtn) {
+            exportSvgBtn.addEventListener('click', () => handleExport('svg'));
+        }
+        if (exportPdfBtn) {
+            exportPdfBtn.addEventListener('click', () => handleExport('pdf'));
+        }
         
         // 导出选项
-        exportBg.addEventListener('change', handleExportBgChange);
-        customBgColor.addEventListener('change', handleCustomBgColorChange);
+        if (exportBg) {
+            exportBg.addEventListener('change', handleExportBgChange);
+        }
+        if (customBgColor) {
+            customBgColor.addEventListener('change', handleCustomBgColorChange);
+        }
         
         // 动画选择器
-        textAnimation.addEventListener('change', handleAnimationChange);
+        if (textAnimation) {
+            textAnimation.addEventListener('change', handleAnimationChange);
+        }
         
         // 偏好设置按钮
-        savePrefsBtn.addEventListener('click', handleSavePreferences);
-        loadPrefsBtn.addEventListener('click', handleLoadPreferences);
-        resetPrefsBtn.addEventListener('click', handleResetPreferences);
+        if (savePrefsBtn) {
+            savePrefsBtn.addEventListener('click', handleSavePreferences);
+        }
+        if (loadPrefsBtn) {
+            loadPrefsBtn.addEventListener('click', handleLoadPreferences);
+        }
+        if (resetPrefsBtn) {
+            resetPrefsBtn.addEventListener('click', handleResetPreferences);
+        }
         
         // 导航按钮
         const helpBtn = document.getElementById('help-btn');
@@ -213,8 +254,31 @@ function handleHeroTextInput(event) {
         const text = event.target.value;
         // 更新所有样式预览
         updateAllStylePreviews(text);
+        // 同步到主预览文本输入框
+        if (textInput) {
+            textInput.value = text;
+        }
     } catch (error) {
         console.error('处理Hero文本输入失败:', error);
+    }
+}
+
+/**
+ * 处理主预览文本输入
+ */
+function handleMainTextInput(event) {
+    try {
+        const text = event.target.value;
+        // 更新主预览文本
+        updatePreviewText(text);
+        // 更新所有样式预览
+        updateAllStylePreviews(text);
+        // 同步到Hero文本输入框
+        if (heroTextInput) {
+            heroTextInput.value = text;
+        }
+    } catch (error) {
+        console.error('处理主预览文本输入失败:', error);
     }
 }
 
@@ -242,6 +306,14 @@ function handleSurpriseMe() {
         if (heroTextInput) {
             heroTextInput.value = randomText;
         }
+        
+        // 更新主预览输入框
+        if (textInput) {
+            textInput.value = randomText;
+        }
+        
+        // 更新主预览文本
+        updatePreviewText(randomText);
         
         // 更新所有样式预览
         updateAllStylePreviews(randomText);
@@ -482,7 +554,7 @@ function handleKeyboardShortcuts(event) {
     try {
         // Ctrl/Cmd + C 复制
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
-            if (document.activeElement === textInput) {
+            if (document.activeElement === textInput || document.activeElement === heroTextInput) {
                 return; // 如果焦点在输入框，使用默认复制行为
             }
             event.preventDefault();
@@ -1130,12 +1202,12 @@ function updatePreviewAnimation(animation) {
 function handleSavePreferences() {
     try {
         const preferences = {
-            text: textInput.value,
+            text: textInput ? textInput.value : (heroTextInput ? heroTextInput.value : ''),
             fontSize: currentFontSize,
             style: currentStyle,
-            fontFamily: fontFamilySelect.value,
-            textColor: textColorPicker.value,
-            animation: textAnimation.value
+            fontFamily: fontFamilySelect ? fontFamilySelect.value : 'Arial, sans-serif',
+            textColor: textColorPicker ? textColorPicker.value : '#3b82f6',
+            animation: textAnimation ? textAnimation.value : 'none'
         };
         
         localStorage.setItem('bigTextGenerator_preferences', JSON.stringify(preferences));
@@ -1160,17 +1232,33 @@ function handleLoadPreferences() {
         const preferences = JSON.parse(saved);
         
         // 应用保存的设置
-        textInput.value = preferences.text || '';
+        if (textInput) {
+            textInput.value = preferences.text || '';
+        }
+        if (heroTextInput) {
+            heroTextInput.value = preferences.text || '';
+        }
+        
         currentFontSize = preferences.fontSize || 60;
-        fontSizeSlider.value = currentFontSize;
-        fontSizeValue.textContent = `${currentFontSize}px`;
+        if (fontSizeSlider) {
+            fontSizeSlider.value = currentFontSize;
+        }
+        if (fontSizeValue) {
+            fontSizeValue.textContent = `${currentFontSize}px`;
+        }
         
         currentStyle = preferences.style || 'bold';
         setActiveStyle(currentStyle);
         
-        fontFamilySelect.value = preferences.fontFamily || 'Arial, sans-serif';
-        textColorPicker.value = preferences.textColor || '#3b82f6';
-        textAnimation.value = preferences.animation || 'none';
+        if (fontFamilySelect) {
+            fontFamilySelect.value = preferences.fontFamily || 'Arial, sans-serif';
+        }
+        if (textColorPicker) {
+            textColorPicker.value = preferences.textColor || '#3b82f6';
+        }
+        if (textAnimation) {
+            textAnimation.value = preferences.animation || 'none';
+        }
         
         // 更新预览
         updatePreview();
@@ -1190,17 +1278,33 @@ function handleResetPreferences() {
     try {
         if (confirm('Are you sure you want to reset all settings to default?')) {
             // 重置所有设置
-            textInput.value = '';
+            if (textInput) {
+                textInput.value = '';
+            }
+            if (heroTextInput) {
+                heroTextInput.value = '';
+            }
+            
             currentFontSize = 60;
-            fontSizeSlider.value = currentFontSize;
-            fontSizeValue.textContent = `${currentFontSize}px`;
+            if (fontSizeSlider) {
+                fontSizeSlider.value = currentFontSize;
+            }
+            if (fontSizeValue) {
+                fontSizeValue.textContent = `${currentFontSize}px`;
+            }
             
             currentStyle = 'bold';
             setActiveStyle(currentStyle);
             
-            fontFamilySelect.value = 'Arial, sans-serif';
-            textColorPicker.value = '#3b82f6';
-            textAnimation.value = 'none';
+            if (fontFamilySelect) {
+                fontFamilySelect.value = 'Arial, sans-serif';
+            }
+            if (textColorPicker) {
+                textColorPicker.value = '#3b82f6';
+            }
+            if (textAnimation) {
+                textAnimation.value = 'none';
+            }
             
             // 更新预览
             updatePreview();
