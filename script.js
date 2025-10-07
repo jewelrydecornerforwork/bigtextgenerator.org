@@ -626,9 +626,29 @@ function handleTextColorChange(event) {
  */
 function updatePreviewFontFamily(fontFamily) {
     try {
+        // 更新主预览文本
         if (previewText) {
             previewText.style.fontFamily = fontFamily;
         }
+        
+        // 更新所有艺术样式预览的字体（除了有特殊字体的样式）
+        const stylePreviews = document.querySelectorAll('.style-preview');
+        stylePreviews.forEach(preview => {
+            // 检查是否有特殊的字体样式类，如果有则不覆盖
+            const hasSpecialFont = preview.classList.contains('gothic-reverie') ||
+                                 preview.classList.contains('gentle-calligraphy') ||
+                                 preview.classList.contains('gothic-intrigue') ||
+                                 preview.classList.contains('monospace-elegance') ||
+                                 preview.classList.contains('modern-blockade') ||
+                                 preview.classList.contains('urban-square') ||
+                                 preview.classList.contains('modern-clarity') ||
+                                 preview.classList.contains('harmonic-essence') ||
+                                 preview.classList.contains('classic-reverie');
+            
+            if (!hasSpecialFont) {
+                preview.style.fontFamily = fontFamily;
+            }
+        });
     } catch (error) {
         console.error('更新预览字体失败:', error);
     }
@@ -639,6 +659,7 @@ function updatePreviewFontFamily(fontFamily) {
  */
 function updatePreviewColor(color) {
     try {
+        // 更新主预览文本
         if (previewText) {
             // 对于某些样式，颜色可能被覆盖，所以需要特殊处理
             if (currentStyle === 'gradient' || currentStyle === 'rainbow') {
@@ -647,6 +668,25 @@ function updatePreviewColor(color) {
             }
             previewText.style.color = color;
         }
+        
+        // 更新所有艺术样式预览的颜色（除了有特殊颜色的样式）
+        const stylePreviews = document.querySelectorAll('.style-preview');
+        stylePreviews.forEach(preview => {
+            // 检查是否有特殊的颜色样式类，如果有则不覆盖
+            const hasSpecialColor = preview.classList.contains('gothic-reverie') ||
+                                  preview.classList.contains('gentle-calligraphy') ||
+                                  preview.classList.contains('gothic-intrigue') ||
+                                  preview.classList.contains('monospace-elegance') ||
+                                  preview.classList.contains('modern-blockade') ||
+                                  preview.classList.contains('urban-square') ||
+                                  preview.classList.contains('modern-clarity') ||
+                                  preview.classList.contains('harmonic-essence') ||
+                                  preview.classList.contains('classic-reverie');
+            
+            if (!hasSpecialColor) {
+                preview.style.color = color;
+            }
+        });
     } catch (error) {
         console.error('更新预览颜色失败:', error);
     }
@@ -700,9 +740,16 @@ function updatePreviewText(text) {
  */
 function updatePreviewSize(size) {
     try {
+        // 更新主预览文本
         if (previewText) {
             previewText.style.fontSize = `${size}px`;
         }
+        
+        // 更新所有艺术样式预览的字体大小
+        const stylePreviews = document.querySelectorAll('.style-preview');
+        stylePreviews.forEach(preview => {
+            preview.style.fontSize = `${size}px`;
+        });
     } catch (error) {
         console.error('更新预览字体大小失败:', error);
     }
