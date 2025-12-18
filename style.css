@@ -1604,4 +1604,145 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* SEO Content Section */
+.seo-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    background: var(--bg-primary);
+}
+
+.seo-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content-block {
+    margin-bottom: 48px;
+}
+
+.content-block:last-child {
+    margin-bottom: 0;
+}
+
+.content-block h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.content-block h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 24px 0 12px 0;
+}
+
+.content-block p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.feature-list,
+.steps-list {
+    padding-left: 24px;
+    margin: 16px 0;
+}
+
+.feature-list li,
+.steps-list li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    padding-left: 8px;
+}
+
+.feature-list li strong,
+.steps-list li strong {
+    color: var(--text-primary);
+}
+
+.effects-description {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-top: 20px;
+}
+
+.effects-description h3 {
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+.effects-description h3:first-child {
+    margin-top: 0;
+}
+
+.faq-section .faq-item {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.faq-section .faq-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+}
+
+.faq-section .faq-item p {
+    margin-bottom: 0;
+}
+
+/* SEO Content Responsive */
+@media (max-width: 768px) {
+    .seo-content {
+        padding: 40px 16px;
+    }
+
+    .content-block h2 {
+        font-size: 24px;
+    }
+
+    .content-block h3 {
+        font-size: 18px;
+    }
+
+    .content-block p,
+    .feature-list li,
+    .steps-list li {
+        font-size: 15px;
+    }
+
+    .effects-description {
+        padding: 16px;
+    }
+
+    .faq-section .faq-item {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seo-content {
+        padding: 32px 12px;
+    }
+
+    .content-block {
+        margin-bottom: 32px;
+    }
+
+    .content-block h2 {
+        font-size: 20px;
+    }
 }
